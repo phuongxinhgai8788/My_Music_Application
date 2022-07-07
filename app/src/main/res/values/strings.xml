@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">My Music Application</string>
+    <string name="My_Playlist">My Playlist</string>
+    <string name="guide_line"><![CDATA[Thank you for using our product. To fully use the system, please go to Settings -> Apps -> My Music Application -> Permissions -> Denied -> Allow access to media only]]></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="list_is_empty">Oops, there is no song in your list. Please download some to have best experience.</string>
+</resources>

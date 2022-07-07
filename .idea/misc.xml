@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MyMusicApplication/app/src/main/res/drawable/avatar_background.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MyMusicApplication/app/src/main/res/drawable/avatar_transparent_background.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MyMusicApplication/app/src/main/res/drawable/background_field.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MyMusicApplication/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MyMusicApplication/app/src/main/res/drawable/ic_pause.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MyMusicApplication/app/src/main/res/drawable/ic_play.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MyMusicApplication/app/src/main/res/drawable/song_detail_background.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MyMusicApplication/app/src/main/res/layout-land/activity_main.xml" value="0.15211640211640212" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MyMusicApplication/app/src/main/res/layout-land/fragment_no_permission.xml" value="0.15211640211640212" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MyMusicApplication/app/src/main/res/layout-land/fragment_play_list.xml" value="0.15211640211640212" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MyMusicApplication/app/src/main/res/layout-land/fragment_song_detail.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MyMusicApplication/app/src/main/res/layout-land/song_item.xml" value="0.15211640211640212" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MyMusicApplication/app/src/main/res/layout/activity_main.xml" value="0.1796875" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MyMusicApplication/app/src/main/res/layout/fragment_no_permission.xml" value="0.1796875" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MyMusicApplication/app/src/main/res/layout/fragment_play_list.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MyMusicApplication/app/src/main/res/layout/fragment_song_detail.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MyMusicApplication/app/src/main/res/layout/song_item.xml" value="0.18333333333333332" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MyMusicApplication/app/src/main/res/mipmap-anydpi-v26/avatar.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MyMusicApplication/app/src/main/res/mipmap-anydpi-v26/avatar_02_round.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MyMusicApplication/app/src/main/res/mipmap-anydpi-v26/avatar_round.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MyMusicApplication/app/src/main/res/mipmap-anydpi-v26/avatar_transparent.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MyMusicApplication/app/src/main/res/mipmap-anydpi-v26/avatar_transparent_round.xml" value="0.1" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
