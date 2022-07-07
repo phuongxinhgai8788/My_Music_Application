@@ -35,7 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SongDetailFragment extends Fragment implements View.OnClickListener, Runnable{
+public class SongDetailFragment extends Fragment implements View.OnClickListener{
 
 
     private static final String ARG_INDEX = "param2";
@@ -126,42 +126,6 @@ public class SongDetailFragment extends Fragment implements View.OnClickListener
         singerTV.setText(song.getAuthor());
         currentPositionTV.setText(repository.getPlayedSongPosition()+"");
         songLengthTV.setText(repository.getSongDuration()+"");
- //       seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-//            @Override
-//            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-//                int x = (int) Math.ceil(i/1000f);
-//                if (x < 10)
-//                    currentPositionTV.setText("0:0" + x);
-//                else
-//                    currentPositionTV.setText("0:" + x);
-//                double percent = i / (double) seekBar.getMax();
-//                int offset = seekBar.getThumbOffset();
-//                int seekWidth = seekBar.getWidth();
-//                int val = (int) Math.round(percent * (seekWidth - 2 * offset));
-//                int labelWidth = currentPositionTV.getWidth();
-//                currentPositionTV.setX(offset + seekBar.getX() + val
-//                        - Math.round(percent * offset)
-//                        - Math.round(percent * labelWidth / 2));
-//
-//                if (i > 0 && !myMediaPlayer.isPlaying()) {
-//                    myMediaPlayer.stop();
-//                    myMediaPlayer.release();
-//                    SongDetailFragment.this.seekBar.setProgress(0);
-//                }
-//            }
-//
-//            @Override
-//            public void onStartTrackingTouch(SeekBar seekBar) {
-//
-//            }
-//
-//            @Override
-//            public void onStopTrackingTouch(SeekBar seekBar) {
-//                if (myMediaPlayer.isPlaying()) {
-//                    myMediaPlayer.seekTo(seekBar.getProgress());
-//                }
-//            }
-//        });
     }
 
     private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
@@ -188,44 +152,26 @@ public class SongDetailFragment extends Fragment implements View.OnClickListener
             case R.id.iv_play_next:
                 songIndex = songIndex<(songs.size()-1)?songIndex+1:0;
                 song = songs.get(songIndex);
-//                localBroadcastSender.sendBroadcastPlayNext(songs);
+                localBroadcastSender.sendBroadcastPlayNext(songs);
                 localBroadcastSender.sendBroadcastChangeSongDetail(song);
                 break;
             case R.id.iv_play_prev:
                 songIndex = songIndex==0?songs.size()-1:songIndex-1;
                 song = songs.get(songIndex);
-//                localBroadcastSender.sendBroadcastPlayPrevious(songs);
+                localBroadcastSender.sendBroadcastPlayPrevious(songs);
                 localBroadcastSender.sendBroadcastChangeSongDetail(song);
                 break;
             case R.id.iv_play:
                 if(repository.getMusicIsPlaying()){
                     playOrPauseBtn.setImageResource(R.drawable.ic_play);
-//                    localBroadcastSender.sendBroadcastPause(songs);
+                    localBroadcastSender.sendBroadcastPause(songs);
                 }else{
                     playOrPauseBtn.setImageResource(R.drawable.ic_pause);
-//                    localBroadcastSender.sendBroadcastResume(songs);
+                    localBroadcastSender.sendBroadcastResume(songs);
                 }
 
             default:
                 break;
-        }
-    }
-
-    @Override
-    public void run() {
-        int currentPosition = myMediaPlayer.getCurrentPosition();
-        int total = myMediaPlayer.getDuration();
-
-        while(myMediaPlayer !=null && myMediaPlayer.isPlaying() && currentPosition < total){
-            try{
-                Thread.sleep(1000);
-                currentPosition = myMediaPlayer.getCurrentPosition();
-            } catch (InterruptedException e) {
-                return;
-            } catch (Exception e){
-                return;
-            }
-            seekBar.setProgress(currentPosition);
         }
     }
 

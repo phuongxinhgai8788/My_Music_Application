@@ -133,7 +133,7 @@ public class PlayListFragment extends Fragment {
                 if(isPortrait) {
                     SongDetailFragment songDetailFragment = SongDetailFragment.newInstance(songs, songPosition);
                     OpenScreen.openScreen(songDetailFragment, true, isPortrait,(MainActivity)context);
-                    songDetailFragment.playSong();
+                    localBroadcastSender.sendBroadcastPlay(songs);
                 }else{
                     localBroadcastSender.sendBroadcastChangeSongDetail(song);
                 }
