@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -35,7 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SongDetailFragment extends Fragment implements View.OnClickListener{
+public class SongDetailFragment extends Fragment implements View.OnClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
 
     private static final String ARG_INDEX = "param2";
@@ -91,7 +92,7 @@ public class SongDetailFragment extends Fragment implements View.OnClickListener
         filter.addAction(Constant.ACTION_CHANGE_SONG_DETAIL);
         LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(requireContext());
         localBroadcastManager.registerReceiver(broadcastReceiver,filter);
-
+        repository.registerListener(this);
     }
 
     @Override
@@ -153,13 +154,12 @@ public class SongDetailFragment extends Fragment implements View.OnClickListener
                 songIndex = songIndex<(songs.size()-1)?songIndex+1:0;
                 song = songs.get(songIndex);
                 localBroadcastSender.sendBroadcastPlayNext(songs);
-                localBroadcastSender.sendBroadcastChangeSongDetail(song);
                 break;
             case R.id.iv_play_prev:
                 songIndex = songIndex==0?songs.size()-1:songIndex-1;
                 song = songs.get(songIndex);
+                myMediaPlayer.prepareSong(song);
                 localBroadcastSender.sendBroadcastPlayPrevious(songs);
-                localBroadcastSender.sendBroadcastChangeSongDetail(song);
                 break;
             case R.id.iv_play:
                 if(repository.getMusicIsPlaying()){
@@ -175,5 +175,16 @@ public class SongDetailFragment extends Fragment implements View.OnClickListener
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        repository.unregisterListener(this);
+    }
 
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+        if(Repository.PREF_SAVE_PLAYED_SONG_INDEX.equals(s)){
+            localBroadcastSender.sendBroadcastChangeSongDetail(song);
+        }
+    }
 }

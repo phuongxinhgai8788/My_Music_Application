@@ -3,17 +3,19 @@ package com.example.mymusicapplication.sender_receiver_service;
 import android.content.ContentUris;
 import android.content.Context;
 import android.media.AudioAttributes;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.PowerManager;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.MediaController;
+import android.widget.SeekBar;
 
 import com.example.mymusicapplication.model.Song;
 import com.example.mymusicapplication.repository.Repository;
 
-public class MyMediaPlayer implements MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener, MediaController.MediaPlayerControl {
+public class MyMediaPlayer implements MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener, MediaController.MediaPlayerControl, AudioManager.OnAudioFocusChangeListener{
 
     private static MyMediaPlayer myMediaPlayer;
     private Context context;
@@ -149,5 +151,10 @@ public class MyMediaPlayer implements MediaPlayer.OnPreparedListener, MediaPlaye
 
     public void release() {
         mediaPlayer.release();
+    }
+
+    @Override
+    public void onAudioFocusChange(int i) {
+
     }
 }

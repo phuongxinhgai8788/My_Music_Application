@@ -25,7 +25,7 @@ public class Repository {
     private static final String PREF_SAVE_SONG_DURATION = "preferenceSaveSongDuration";
     private static String PREF_SAVE_IS_PORTRAIT_SCREEN = "preferenceSaveIsPortraitScreen";
     private static Repository instance;
-    private String PREF_SAVE_PLAYED_SONG_INDEX = "preferenceSavePlayedSongIndex";
+    public static final String PREF_SAVE_PLAYED_SONG_INDEX = "preferenceSavePlayedSongIndex";
     private String PREF_SAVE_PLAYED_SONG_POSITION = "preferenceSavePlayedSongPosition";
     private String PREF_SAVE_MUSIC_IS_PLAYING = "preferenceSaveIsPlaying";
     private String TAG = "Repository";
@@ -33,13 +33,6 @@ public class Repository {
 
     private Repository(Context context) {
         this.context = context;
-    }
-
-    protected Repository(Parcel in) {
-        PREF_SAVE_PLAYED_SONG_INDEX = in.readString();
-        PREF_SAVE_PLAYED_SONG_POSITION = in.readString();
-        PREF_SAVE_MUSIC_IS_PLAYING = in.readString();
-        TAG = in.readString();
     }
 
     public static Repository getInstance(Context context) {
@@ -111,4 +104,15 @@ public class Repository {
                 .putInt(PREF_SAVE_SONG_DURATION, songDuration)
                 .apply();
     }
+
+    public void registerListener(SharedPreferences.OnSharedPreferenceChangeListener listener) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        preferences.registerOnSharedPreferenceChangeListener(listener);
+    }
+
+    public void unregisterListener(SharedPreferences.OnSharedPreferenceChangeListener listener) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        preferences.unregisterOnSharedPreferenceChangeListener(listener);
+    }
+
 }

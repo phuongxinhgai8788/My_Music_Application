@@ -111,7 +111,6 @@ public class MainActivity extends AppCompatActivity implements LocalBroadcastSen
         PermissionsUtil.requestPermissions(this, requestCode, permissions);
     }
     private boolean checkStorePermission(int my_permission_request_read_media) {
-        Log.i(TAG, "checkStorePermission");
         if (my_permission_request_read_media == MY_PERMISSION_REQUEST_READ_MEDIA) {
             return PermissionsUtil.checkPermissions(this,
                     Manifest.permission.READ_EXTERNAL_STORAGE);
@@ -148,7 +147,6 @@ public class MainActivity extends AppCompatActivity implements LocalBroadcastSen
 
     private void openNoPermissionFragment(){
         OpenScreen.openScreen(new NoPermissionFragment(), false, isPortraitLayout, this);
-        Log.i(TAG, "openNoPermissionFragment");
 
     }
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -180,7 +178,6 @@ public class MainActivity extends AppCompatActivity implements LocalBroadcastSen
                 } while (musicCursor.moveToNext());
             }
             Collections.sort(songs, Comparator.comparing(Song::getTitle));
-        Log.i(TAG, "queryMusic");
 
     }
 

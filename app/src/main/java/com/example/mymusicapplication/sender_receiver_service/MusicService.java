@@ -26,9 +26,9 @@ import com.example.mymusicapplication.utils.Constant;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class MusicService extends Service {
+public class MusicService extends Service implements MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener, MediaController.MediaPlayerControl, AudioManager.OnAudioFocusChangeListener{
 
-    private MyMediaPlayer myMediaPlayer = MyMediaPlayer.getInstance();
+    private MediaPlayer mediaPlayer;
     private Song song;
     private int songIndex;
     private int songPosition;
@@ -40,6 +40,7 @@ public class MusicService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        initMediaPlayer();
     }
 
     @Override
@@ -59,7 +60,7 @@ public class MusicService extends Service {
     private void handleAction(String action) {
         switch (action){
             case Constant.ACTION_PLAY:
-                myMediaPlayer.prepareSong(song);
+                prepareSong(song);
                 break;
             case Constant.ACTION_PLAY_NEXT:
                 songIndex = songIndex<(songs.size()-1)?songIndex+1:0;
@@ -67,7 +68,7 @@ public class MusicService extends Service {
                 repository.savePlayedSongIndex(songIndex);
                 repository.savePlayedSongPosition(songPosition);
                 song = songs.get(songIndex);
-                myMediaPlayer.prepareSong(song);
+                prepareSong(song);
                 break;
             case Constant.ACTION_PLAY_PREVIOUS:
                 songIndex = songIndex==0?songs.size()-1:songIndex-1;
@@ -75,20 +76,20 @@ public class MusicService extends Service {
                 repository.savePlayedSongIndex(songIndex);
                 repository.savePlayedSongPosition(songPosition);
                 song = songs.get(songIndex);
-                myMediaPlayer.prepareSong(song);
+                prepareSong(song);
                 break;
             case Constant.ACTION_PAUSE:
                 isPlaying = false;
-                songPosition = myMediaPlayer.getCurrentPosition();
+                songPosition = getCurrentPosition();
                 repository.saveIsMusicIsPlaying(isPlaying);
                 repository.savePlayedSongPosition(songPosition);
-                myMediaPlayer.pause();
+                mediaPlayer.pause();
                 break;
             case Constant.ACTION_RESUME:
                 isPlaying = true;
                 repository.saveIsMusicIsPlaying(isPlaying);
-                myMediaPlayer.seekTo(songPosition);
-                myMediaPlayer.start();
+                mediaPlayer.seekTo(songPosition);
+                mediaPlayer.start();
                 break;
 
         }
@@ -96,8 +97,6 @@ public class MusicService extends Service {
 
     @Override
     public void onDestroy() {
-        Log.i(TAG, "onDestroy: ");
-        myMediaPlayer.onServiceDestroy();
         super.onDestroy();
     }
 
@@ -105,5 +104,110 @@ public class MusicService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         return null;
+    }
+
+    private void initMediaPlayer() {
+        mediaPlayer = new MediaPlayer();
+        mediaPlayer.setWakeMode(getApplicationContext(), PowerManager.PARTIAL_WAKE_LOCK);
+        mediaPlayer.setAudioAttributes(
+                new AudioAttributes
+                        .Builder()
+                        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                        .build());
+        mediaPlayer.setOnPreparedListener(this);
+        mediaPlayer.setOnCompletionListener(this);
+        mediaPlayer.setOnErrorListener(this);
+    }
+
+    public void prepareSong(Song song){
+        // Reset first because the user is playing subsequent songs
+        mediaPlayer.reset();
+        // Get id
+        long playedSongId = song.getId();
+        // set URI
+        Uri trackUri = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, playedSongId);
+        try {
+            mediaPlayer.setDataSource(getApplicationContext(), trackUri);
+        } catch (Exception e) {
+            Log.e(TAG, "Error setting data source", e);
+        }
+        mediaPlayer.prepareAsync();
+    }
+
+    @Override
+    public void onCompletion(MediaPlayer mediaPlayer) {
+        repository.saveIsMusicIsPlaying(false);
+        repository.savePlayedSongPosition(0);
+    }
+
+    @Override
+    public boolean onError(MediaPlayer mediaPlayer, int i, int i1) {
+        mediaPlayer.reset();
+        return false;
+    }
+
+    @Override
+    public void onPrepared(MediaPlayer mediaPlayer) {
+        mediaPlayer.start();
+    }
+
+    @Override
+    public void start() {
+        mediaPlayer.start();
+    }
+
+    @Override
+    public void pause() {
+        mediaPlayer.pause();
+    }
+
+    @Override
+    public int getDuration() {
+        return mediaPlayer.getDuration();
+    }
+
+    @Override
+    public int getCurrentPosition() {
+        return mediaPlayer.getCurrentPosition();
+    }
+
+    @Override
+    public void seekTo(int i) {
+        mediaPlayer.seekTo(i);
+    }
+
+    @Override
+    public boolean isPlaying() {
+        return mediaPlayer.isPlaying();
+    }
+
+    @Override
+    public int getBufferPercentage() {
+        return 0;
+    }
+
+    @Override
+    public boolean canPause() {
+        return true;
+    }
+
+    @Override
+    public boolean canSeekBackward() {
+        return true;
+    }
+
+    @Override
+    public boolean canSeekForward() {
+        return true;
+    }
+
+    @Override
+    public int getAudioSessionId() {
+        return 0;
+    }
+
+    @Override
+    public void onAudioFocusChange(int i) {
+
     }
 }
