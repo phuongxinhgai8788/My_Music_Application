@@ -6,13 +6,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.Manifest;
+import android.content.ComponentName;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.FrameLayout;
@@ -24,6 +29,7 @@ import com.example.mymusicapplication.SongDetailFragment;
 import com.example.mymusicapplication.repository.Repository;
 import com.example.mymusicapplication.sender_receiver_service.LocalBroadcastReceiver;
 import com.example.mymusicapplication.sender_receiver_service.LocalBroadcastSender;
+import com.example.mymusicapplication.sender_receiver_service.MusicService;
 import com.example.mymusicapplication.utils.Constant;
 import com.example.mymusicapplication.utils.OpenScreen;
 import com.example.mymusicapplication.model.Song;
@@ -42,30 +48,29 @@ public class MainActivity extends AppCompatActivity implements LocalBroadcastSen
     SongDetailFragment songDetailFragment;
     ArrayList<Song> songs = new ArrayList<>();
     Repository repository = Repository.getInstance();
-//    MusicService musicService;
-//    boolean isBound;
+    MusicService musicService;
+    MediaPlayer mediaPlayer;
+    boolean isBound;
     boolean isPlaying;
     int songIndex;
     int playedPosition;
      Song closetOrCurrentPlayedSong;
      final String TAG = "MainActivity";
-//    private ServiceConnection connection = new ServiceConnection() {
-//        @Override
-//        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-//            MusicService.LocalBinder binder = (MusicService.LocalBinder) iBinder;
-//            musicService = binder.getService();
-//            musicService.setRepository(MainActivity.this);
-//            musicService.setSongList(songs);
-//            isBound = true;
-//            Log.i(TAG, "onServiceConnected");
-//        }
-//
-//        @Override
-//        public void onServiceDisconnected(ComponentName componentName) {
-//            Log.i(TAG, "onServiceDisconnected");
-//            isBound = false;
-//        }
-//    };
+    private ServiceConnection connection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+            MusicService.LocalBinder binder = (MusicService.LocalBinder) iBinder;
+            musicService = binder.getService();
+            mediaPlayer = musicService.getMediaPlayer();
+            isBound = true;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+            isBound = false;
+            mediaPlayer = null;
+        }
+    };
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,12 +143,11 @@ public class MainActivity extends AppCompatActivity implements LocalBroadcastSen
         }
     }
 
-//    private void bindService(){
-//        Intent intent = new Intent(this, MusicService.class);
-//        bindService(intent, connection, Context.BIND_AUTO_CREATE);
-//        Log.i(TAG, "bindService");
-//
-//    }
+    private void bindService(){
+        Intent intent = new Intent(this, MusicService.class);
+        bindService(intent, connection, Context.BIND_AUTO_CREATE);
+
+    }
 
     private void openNoPermissionFragment(){
         OpenScreen.openScreen(new NoPermissionFragment(), false, isPortraitLayout, this);
@@ -184,6 +188,7 @@ public class MainActivity extends AppCompatActivity implements LocalBroadcastSen
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        unbindService(connection);
 //        mediaPlayer.release();
     }
 

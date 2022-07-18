@@ -35,6 +35,8 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     private boolean isPlaying;
     private ArrayList<Song> songs;
     Repository repository = Repository.getInstance();
+    private Binder localBinder = new LocalBinder();
+
     private String TAG = "MusicService";
 
     @Override
@@ -103,7 +105,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return null;
+        return localBinder;
     }
 
     private void initMediaPlayer() {
@@ -209,5 +211,13 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     @Override
     public void onAudioFocusChange(int i) {
 
+    }
+    public MediaPlayer getMediaPlayer(){
+        return mediaPlayer;
+    }
+    public class LocalBinder extends Binder {
+        public MusicService getService(){
+            return MusicService.this;
+        }
     }
 }
