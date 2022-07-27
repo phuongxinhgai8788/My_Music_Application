@@ -1,4 +1,4 @@
-package com.example.mymusicapplication.sender_receiver_service;
+package com.example.mymusicapplication.sender_receiver_service_worker;
 
 import com.example.mymusicapplication.model.Song;
 

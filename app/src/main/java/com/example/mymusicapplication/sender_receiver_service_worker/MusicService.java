@@ -1,10 +1,8 @@
-package com.example.mymusicapplication.sender_receiver_service;
+package com.example.mymusicapplication.sender_receiver_service_worker;
 
 import android.app.Service;
 import android.content.ContentUris;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -17,13 +15,15 @@ import android.util.Log;
 import android.widget.MediaController;
 
 import androidx.annotation.Nullable;
+import androidx.work.Constraints;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
+import androidx.work.WorkRequest;
 
-import com.example.mymusicapplication.R;
 import com.example.mymusicapplication.model.Song;
 import com.example.mymusicapplication.repository.Repository;
 import com.example.mymusicapplication.utils.Constant;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class MusicService extends Service implements MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener, MediaController.MediaPlayerControl, AudioManager.OnAudioFocusChangeListener{
@@ -36,13 +36,24 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     private ArrayList<Song> songs;
     Repository repository = Repository.getInstance();
     private Binder localBinder = new LocalBinder();
-
+    private WorkRequest workRequest;
     private String TAG = "MusicService";
 
     @Override
     public void onCreate() {
         super.onCreate();
         initMediaPlayer();
+    }
+
+    private void setUpWorkRequest() {
+        Constraints constraints = new Constraints.Builder()
+                .setRequiresBatteryNotLow(true)
+                .build();
+        workRequest = new OneTimeWorkRequest
+                .Builder(MusicWorker.class)
+                .setConstraints(constraints)
+                .build();
+        WorkManager.getInstance().enqueue(workRequest);
     }
 
     @Override
@@ -122,6 +133,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     }
 
     public void prepareSong(Song song){
+        repository.saveIsMusicIsPlaying(true);
         // Reset first because the user is playing subsequent songs
         mediaPlayer.reset();
         // Get id
@@ -140,6 +152,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     public void onCompletion(MediaPlayer mediaPlayer) {
         repository.saveIsMusicIsPlaying(false);
         repository.savePlayedSongPosition(0);
+        setUpWorkRequest();
     }
 
     @Override
@@ -150,7 +163,9 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
 
     @Override
     public void onPrepared(MediaPlayer mediaPlayer) {
+
         mediaPlayer.start();
+
     }
 
     @Override

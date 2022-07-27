@@ -1,4 +1,4 @@
-package com.example.mymusicapplication.sender_receiver_service;
+package com.example.mymusicapplication.sender_receiver_service_worker;
 
 import android.content.ContentUris;
 import android.content.Context;
@@ -10,7 +10,6 @@ import android.os.PowerManager;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.MediaController;
-import android.widget.SeekBar;
 
 import com.example.mymusicapplication.model.Song;
 import com.example.mymusicapplication.repository.Repository;

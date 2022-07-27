@@ -5,4 +5,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="list_is_empty">Oops, there is no song in your list. Please download some to have best experience.</string>
+    <string name="notification_channel_name">Music Notification</string>
+    <string name="notification_title">Notification title</string>
+    <string name="notification_content">The current song has finished playing. Tap me to open the player!</string>
 </resources>

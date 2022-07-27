@@ -17,15 +17,16 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mymusicapplication.manager.MainActivity;
+import com.example.mymusicapplication.manager.VisibleFragment;
 import com.example.mymusicapplication.repository.Repository;
-import com.example.mymusicapplication.sender_receiver_service.LocalBroadcastSender;
+import com.example.mymusicapplication.sender_receiver_service_worker.LocalBroadcastSender;
 import com.example.mymusicapplication.utils.OpenScreen;
 import com.example.mymusicapplication.model.Song;
 
 import java.util.ArrayList;
 
 
-public class PlayListFragment extends Fragment {
+public class PlayListFragment extends VisibleFragment {
 
     private static final String ARG_PLAY_LIST = "param2";
 

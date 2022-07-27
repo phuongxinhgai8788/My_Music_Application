@@ -1,42 +1,43 @@
 package com.example.mymusicapplication;
 
-import android.Manifest;
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.example.mymusicapplication.manager.MainActivity;
+import com.example.mymusicapplication.manager.MyApplication;
+import com.example.mymusicapplication.manager.VisibleFragment;
 import com.example.mymusicapplication.model.Song;
 import com.example.mymusicapplication.repository.Repository;
-import com.example.mymusicapplication.sender_receiver_service.LocalBroadcastSender;
-import com.example.mymusicapplication.sender_receiver_service.MyMediaPlayer;
+import com.example.mymusicapplication.sender_receiver_service_worker.LocalBroadcastSender;
+import com.example.mymusicapplication.sender_receiver_service_worker.MusicWorker;
+import com.example.mymusicapplication.sender_receiver_service_worker.MyMediaPlayer;
 import com.example.mymusicapplication.utils.Constant;
 
-import java.time.Clock;
 import java.util.ArrayList;
-import java.util.List;
 
 
-public class SongDetailFragment extends Fragment implements View.OnClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
+public class SongDetailFragment extends VisibleFragment implements View.OnClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
 
     private static final String ARG_INDEX = "param2";
@@ -56,10 +57,10 @@ public class SongDetailFragment extends Fragment implements View.OnClickListener
     private ImageView playOrPauseBtn;
     private SeekBar seekBar;
     private ArrayList<Song> songs = new ArrayList<>();
-//    private static SongDetailFragment instance;
+    //    private static SongDetailFragment instance;
     LocalBroadcastSender localBroadcastSender;
     Repository repository;
-    MyMediaPlayer myMediaPlayer= MyMediaPlayer.getInstance();
+    MyMediaPlayer myMediaPlayer = MyMediaPlayer.getInstance();
 
 
     public SongDetailFragment() {
@@ -68,11 +69,11 @@ public class SongDetailFragment extends Fragment implements View.OnClickListener
 
     public static SongDetailFragment newInstance(ArrayList<Song> songs, int songIndex) {
 //       if(instance == null) {
-           SongDetailFragment instance = new SongDetailFragment();
-           Bundle args = new Bundle();
-           args.putInt(ARG_INDEX, songIndex);
-           args.putSerializable(ARG_SONG_LIST, songs);
-           instance.setArguments(args);
+        SongDetailFragment instance = new SongDetailFragment();
+        Bundle args = new Bundle();
+        args.putInt(ARG_INDEX, songIndex);
+        args.putSerializable(ARG_SONG_LIST, songs);
+        instance.setArguments(args);
 //       }
         return instance;
     }
@@ -91,7 +92,7 @@ public class SongDetailFragment extends Fragment implements View.OnClickListener
         IntentFilter filter = new IntentFilter();
         filter.addAction(Constant.ACTION_CHANGE_SONG_DETAIL);
         LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(requireContext());
-        localBroadcastManager.registerReceiver(broadcastReceiver,filter);
+        localBroadcastManager.registerReceiver(broadcastReceiver, filter);
         repository.registerListener(this);
     }
 
@@ -110,9 +111,9 @@ public class SongDetailFragment extends Fragment implements View.OnClickListener
         prevBtn.setOnClickListener(this);
         seekBar = view.findViewById(R.id.timer);
         playOrPauseBtn = view.findViewById(R.id.iv_play);
-        if(repository.getMusicIsPlaying()){
+        if (repository.getMusicIsPlaying()) {
             playOrPauseBtn.setImageResource(R.drawable.ic_pause);
-        }else{
+        } else {
             playOrPauseBtn.setImageResource(R.drawable.ic_play);
         }
         playOrPauseBtn.setOnClickListener(this);
@@ -125,14 +126,14 @@ public class SongDetailFragment extends Fragment implements View.OnClickListener
         super.onViewCreated(view, savedInstanceState);
         songTitleTV.setText(song.getTitle());
         singerTV.setText(song.getAuthor());
-        currentPositionTV.setText(repository.getPlayedSongPosition()+"");
-        songLengthTV.setText(repository.getSongDuration()+"");
+        currentPositionTV.setText(repository.getPlayedSongPosition() + "");
+        songLengthTV.setText(repository.getSongDuration() + "");
     }
 
     private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if(intent!=null) {
+            if (intent != null) {
                 if (Constant.ACTION_CHANGE_SONG_DETAIL.equals(intent.getAction())) {
                     song = (Song) intent.getSerializableExtra(Constant.ARG_ABOUT_TO_PLAY_SONG);
                     updateUI(song);
@@ -140,7 +141,8 @@ public class SongDetailFragment extends Fragment implements View.OnClickListener
             }
         }
     };
-    private void updateUI(Song aboutToPlaySong){
+
+    private void updateUI(Song aboutToPlaySong) {
         songTitleTV.setText(aboutToPlaySong.getTitle());
         singerTV.setText(aboutToPlaySong.getAuthor());
     }
@@ -149,23 +151,22 @@ public class SongDetailFragment extends Fragment implements View.OnClickListener
     public void onClick(View view) {
         int viewId = view.getId();
 
-        switch (viewId){
+        switch (viewId) {
             case R.id.iv_play_next:
-                songIndex = songIndex<(songs.size()-1)?songIndex+1:0;
+                songIndex = songIndex < (songs.size() - 1) ? songIndex + 1 : 0;
                 song = songs.get(songIndex);
                 localBroadcastSender.sendBroadcastPlayNext(songs);
                 break;
             case R.id.iv_play_prev:
-                songIndex = songIndex==0?songs.size()-1:songIndex-1;
+                songIndex = songIndex == 0 ? songs.size() - 1 : songIndex - 1;
                 song = songs.get(songIndex);
-                myMediaPlayer.prepareSong(song);
                 localBroadcastSender.sendBroadcastPlayPrevious(songs);
                 break;
             case R.id.iv_play:
-                if(repository.getMusicIsPlaying()){
+                if (repository.getMusicIsPlaying()) {
                     playOrPauseBtn.setImageResource(R.drawable.ic_play);
                     localBroadcastSender.sendBroadcastPause(songs);
-                }else{
+                } else {
                     playOrPauseBtn.setImageResource(R.drawable.ic_pause);
                     localBroadcastSender.sendBroadcastResume(songs);
                 }
@@ -183,7 +184,7 @@ public class SongDetailFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
-        if(Repository.PREF_SAVE_PLAYED_SONG_INDEX.equals(s)){
+        if (Repository.PREF_SAVE_PLAYED_SONG_INDEX.equals(s)) {
             localBroadcastSender.sendBroadcastChangeSongDetail(song);
         }
     }

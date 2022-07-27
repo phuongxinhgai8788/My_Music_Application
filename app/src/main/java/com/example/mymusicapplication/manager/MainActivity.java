@@ -19,7 +19,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.widget.FrameLayout;
 
 import com.example.mymusicapplication.NoPermissionFragment;
@@ -27,9 +26,9 @@ import com.example.mymusicapplication.PlayListFragment;
 import com.example.mymusicapplication.R;
 import com.example.mymusicapplication.SongDetailFragment;
 import com.example.mymusicapplication.repository.Repository;
-import com.example.mymusicapplication.sender_receiver_service.LocalBroadcastReceiver;
-import com.example.mymusicapplication.sender_receiver_service.LocalBroadcastSender;
-import com.example.mymusicapplication.sender_receiver_service.MusicService;
+import com.example.mymusicapplication.sender_receiver_service_worker.LocalBroadcastReceiver;
+import com.example.mymusicapplication.sender_receiver_service_worker.LocalBroadcastSender;
+import com.example.mymusicapplication.sender_receiver_service_worker.MusicService;
 import com.example.mymusicapplication.utils.Constant;
 import com.example.mymusicapplication.utils.OpenScreen;
 import com.example.mymusicapplication.model.Song;
@@ -41,21 +40,25 @@ import java.util.Comparator;
 
 public class MainActivity extends AppCompatActivity implements LocalBroadcastSender {
 
-    final int MY_PERMISSION_REQUEST_READ_MEDIA = 1;
-    boolean isPortraitLayout;
-    FrameLayout container, listContainer, detailContainer;
-    PlayListFragment playListFragment;
-    SongDetailFragment songDetailFragment;
-    ArrayList<Song> songs = new ArrayList<>();
-    Repository repository = Repository.getInstance();
-    MusicService musicService;
-    MediaPlayer mediaPlayer;
-    boolean isBound;
-    boolean isPlaying;
-    int songIndex;
-    int playedPosition;
-     Song closetOrCurrentPlayedSong;
-     final String TAG = "MainActivity";
+    private final int MY_PERMISSION_REQUEST_READ_MEDIA = 1;
+    private final String TAG = "MainActivity";
+
+
+    private FrameLayout container, listContainer, detailContainer;
+    private PlayListFragment playListFragment;
+    private SongDetailFragment songDetailFragment;
+    private ArrayList<Song> songs = new ArrayList<>();
+    private Repository repository = Repository.getInstance();
+    private MusicService musicService;
+    private MediaPlayer mediaPlayer;
+    private Song closetOrCurrentPlayedSong;
+
+    private boolean isPortraitLayout;
+    private boolean isBound;
+    private boolean isPlaying;
+    private int songIndex;
+    private int playedPosition;
+
     private ServiceConnection connection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
@@ -102,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements LocalBroadcastSen
             showRequestPermission(MY_PERMISSION_REQUEST_READ_MEDIA);
         }else{
             queryMusicAndOpenPlayListFragment();
-//            bindService();
+            bindService();
         }
     }
 
@@ -189,7 +192,6 @@ public class MainActivity extends AppCompatActivity implements LocalBroadcastSen
     protected void onDestroy() {
         super.onDestroy();
         unbindService(connection);
-//        mediaPlayer.release();
     }
 
     private void openPlaylistFragment(){
@@ -253,5 +255,9 @@ public class MainActivity extends AppCompatActivity implements LocalBroadcastSen
         intent.setAction(Constant.ACTION_RESUME);
         intent.putExtra(Constant.ARG_PLAY_LIST, songs);
         sendBroadcast(intent);
+    }
+
+    public static Intent newIntent(Context context){
+        return new Intent(context, MainActivity.class);
     }
 }

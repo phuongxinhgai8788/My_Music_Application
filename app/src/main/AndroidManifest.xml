@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mymusicapplication">
+    <permission android:name="com.example.mymusicapplication.PRIVATE"/>
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="com.example.mymusicapplication.PRIVATE"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/avatar"
@@ -20,7 +22,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".sender_receiver_service.LocalBroadcastReceiver"/>
-        <service android:name=".sender_receiver_service.MusicService"/>
+        <receiver android:name=".sender_receiver_service_worker.LocalBroadcastReceiver"
+            android:permission="com.example.mymusicapplication.PRIVATE"
+            android:exported="false">
+            <intent-filter android:priority="-999">
+                <action android:name="com.example.mymusicapplication.SHOW_NOTIFICATION"/>
+            </intent-filter>
+        </receiver>
+        <service android:name=".sender_receiver_service_worker.MusicService"/>
     </application>
 </manifest>
