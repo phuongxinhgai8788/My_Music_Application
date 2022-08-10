@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/song_detail_container"
-    tools:context=".SongDetailFragment">
+    tools:context=".screens.now_playing.NowPlayingFragment">
 
     <ImageView
         android:layout_width="match_parent"

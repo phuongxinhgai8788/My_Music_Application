@@ -8,4 +8,7 @@
     <string name="notification_channel_name">Music Notification</string>
     <string name="notification_title">Notification title</string>
     <string name="notification_content">The current song has finished playing. Tap me to open the player!</string>
+    <string name="request_permission_message">You need to grant this app permission to read your external storage. This is needed to access your music files.</string>
+    <string name="request_permission_button">Continue</string>
+    <string name="denied_permission_messsage">You rejected the permission request, and the app cannot work without it.You will need to reinstall the app or change this setting manually.</string>
 </resources>

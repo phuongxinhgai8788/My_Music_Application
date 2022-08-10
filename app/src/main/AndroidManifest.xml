@@ -1,34 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mymusicapplication">
-    <permission android:name="com.example.mymusicapplication.PRIVATE"/>
+
+    <permission android:name="com.example.mymusicapplication.PRIVATE" />
+
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="com.example.mymusicapplication.PRIVATE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.example.mymusicapplication.PRIVATE" />
+
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/avatar"
+        android:icon="@mipmap/avatar_02"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/avatar_round"
+        android:roundIcon="@mipmap/avatar_02_round"
         android:supportsRtl="true"
-        android:name=".manager.MyApplication"
         android:theme="@style/Theme.MyMusicApplication">
         <activity
-            android:name=".manager.MainActivity"
+            android:name=".screens.activities.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".sender_receiver_service_worker.LocalBroadcastReceiver"
-            android:permission="com.example.mymusicapplication.PRIVATE"
-            android:exported="false">
-            <intent-filter android:priority="-999">
-                <action android:name="com.example.mymusicapplication.SHOW_NOTIFICATION"/>
-            </intent-filter>
-        </receiver>
-        <service android:name=".sender_receiver_service_worker.MusicService"/>
+        <activity
+            android:name=".screens.activities.MainActivity"
+            android:exported="false" />
+
+        <service android:name=".service.MusicService" />
     </application>
+
 </manifest>
