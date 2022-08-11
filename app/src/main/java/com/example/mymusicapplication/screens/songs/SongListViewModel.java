@@ -1,4 +1,4 @@
-package com.example.mymusicapplication.repository;
+package com.example.mymusicapplication.screens.songs;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -7,21 +7,21 @@ import android.util.Log;
 
 import com.example.mymusicapplication.screens.now_playing.NowPlayingViewModel;
 
-public class SongListLoader {
+public class SongListViewModel {
     private final String TAG = "SongListLoader";
     private Cursor cursor = null;
     private Context context;
-    private static SongListLoader INSTANCE;
+    private static SongListViewModel INSTANCE;
     
-    private SongListLoader(Context context){
+    private SongListViewModel(Context context){
         this.context = context;
     }
     
     public static void initialize(Context context){
-        INSTANCE = new SongListLoader(context);
+        INSTANCE = new SongListViewModel(context);
     }
     
-    public static SongListLoader getInstance(){
+    public static SongListViewModel getInstance(){
         if(INSTANCE == null){
             throw new IllegalStateException("SongListLoader must be initialized!");
         }

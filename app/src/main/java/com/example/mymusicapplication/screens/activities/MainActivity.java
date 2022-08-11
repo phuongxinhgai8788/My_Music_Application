@@ -12,15 +12,13 @@ import android.util.Log;
 import androidx.annotation.RequiresApi;
 
 import com.example.mymusicapplication.model.Song;
-import com.example.mymusicapplication.repository.SongListLoader;
+import com.example.mymusicapplication.screens.songs.SongListViewModel;
 import com.example.mymusicapplication.repository.StateRepository;
 import com.example.mymusicapplication.service.MusicService;
 import com.example.mymusicapplication.utils.Constants;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 public class MainActivity extends BaseActivity{
 
@@ -32,7 +30,7 @@ public class MainActivity extends BaseActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Cursor cursor = SongListLoader.getInstance().getCursor();
+        Cursor cursor = SongListViewModel.getInstance().getCursor();
 
 //        Test notification
 
