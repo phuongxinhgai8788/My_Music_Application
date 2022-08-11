@@ -1,4 +1,4 @@
-package com.example.mymusicapplication.service;
+package com.example.mymusicapplication.screens.now_playing_service;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -16,7 +16,7 @@ import androidx.core.app.NotificationCompat;
 import com.example.mymusicapplication.R;
 import com.example.mymusicapplication.model.Song;
 import com.example.mymusicapplication.music_player.MyMusicPlayer;
-import com.example.mymusicapplication.screens.now_playing.NowPlayingViewModel;
+import com.example.mymusicapplication.screens.now_playing_service.NowPlayingViewModel;
 import com.example.mymusicapplication.repository.StateRepository;
 import com.example.mymusicapplication.utils.Constants;
 import com.example.mymusicapplication.utils.MusicNotificationBuilder;

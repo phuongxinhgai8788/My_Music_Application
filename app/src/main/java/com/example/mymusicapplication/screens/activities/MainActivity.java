@@ -14,7 +14,7 @@ import androidx.annotation.RequiresApi;
 import com.example.mymusicapplication.model.Song;
 import com.example.mymusicapplication.screens.songs.SongListViewModel;
 import com.example.mymusicapplication.repository.StateRepository;
-import com.example.mymusicapplication.service.MusicService;
+import com.example.mymusicapplication.screens.now_playing_service.MusicService;
 import com.example.mymusicapplication.utils.Constants;
 
 import java.util.ArrayList;

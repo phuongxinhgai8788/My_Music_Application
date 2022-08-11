@@ -1,14 +1,16 @@
-package com.example.mymusicapplication.model;
+package com.example.mymusicapplication.screens.genre;
+
+import com.example.mymusicapplication.model.Song;
 
 import java.util.List;
 
-public class Artist {
+public class Genre {
 
     private Long id;
     private String name;
     private List<Song> songList;
 
-    public Artist(Long id, String name, List<Song> songList) {
+    public Genre(Long id, String name, List<Song> songList) {
         this.id = id;
         this.name = name;
         this.songList = songList;

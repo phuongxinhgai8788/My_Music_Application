@@ -12,7 +12,7 @@ import android.util.Log;
 import android.widget.MediaController;
 
 import com.example.mymusicapplication.model.Song;
-import com.example.mymusicapplication.screens.now_playing.NowPlayingViewModel;
+import com.example.mymusicapplication.screens.now_playing_service.NowPlayingViewModel;
 import com.example.mymusicapplication.repository.StateRepository;
 
 public class MyMusicPlayer implements MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener, MediaController.MediaPlayerControl, AudioManager.OnAudioFocusChangeListener{

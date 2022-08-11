@@ -1,4 +1,4 @@
-package com.example.mymusicapplication.screens.now_playing;
+package com.example.mymusicapplication.screens.now_playing_service;
 
 import android.os.Bundle;
 

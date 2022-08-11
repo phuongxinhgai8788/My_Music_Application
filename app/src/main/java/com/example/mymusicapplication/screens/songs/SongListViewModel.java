@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.provider.MediaStore;
 import android.util.Log;
 
-import com.example.mymusicapplication.screens.now_playing.NowPlayingViewModel;
+import com.example.mymusicapplication.screens.now_playing_service.NowPlayingViewModel;
 
 public class SongListViewModel {
     private final String TAG = "SongListLoader";

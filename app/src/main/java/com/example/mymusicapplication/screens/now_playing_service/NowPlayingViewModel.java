@@ -1,4 +1,4 @@
-package com.example.mymusicapplication.screens.now_playing;
+package com.example.mymusicapplication.screens.now_playing_service;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.provider.MediaStore;
 
 import com.example.mymusicapplication.model.Song;
-import com.example.mymusicapplication.repository.MyCursor;
+import com.example.mymusicapplication.repository.MyMediaCursor;
 import com.example.mymusicapplication.repository.StateRepository;
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import java.util.List;
 
 public class NowPlayingViewModel {
 
-    private MyCursor cursorLoader = MyCursor.getInstance();
+    private MyMediaCursor cursorLoader = MyMediaCursor.getInstance();
     private StateRepository stateRepository = StateRepository.getInstance();
 
     private static NowPlayingViewModel INSTANCE;

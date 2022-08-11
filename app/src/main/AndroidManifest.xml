@@ -29,7 +29,7 @@
             android:name=".screens.activities.MainActivity"
             android:exported="false" />
 
-        <service android:name=".service.MusicService" />
+        <service android:name=".screens.now_playing_service.MusicService" />
     </application>
 
 </manifest>

@@ -6,13 +6,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v4.media.session.MediaSessionCompat;
-import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 
 import com.example.mymusicapplication.R;
 import com.example.mymusicapplication.model.Song;
-import com.example.mymusicapplication.service.MusicService;
+import com.example.mymusicapplication.screens.now_playing_service.MusicService;
 
 public class MusicNotificationBuilder {
 

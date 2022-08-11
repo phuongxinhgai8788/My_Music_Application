@@ -1,17 +1,17 @@
-package com.example.mymusicapplication.model;
+package com.example.mymusicapplication.screens.artist;
+
+import com.example.mymusicapplication.model.Song;
 
 import java.util.List;
 
-public class Genre {
+public class Artist {
 
     private Long id;
     private String name;
-    private List<Song> songList;
 
-    public Genre(Long id, String name, List<Song> songList) {
+    public Artist(Long id, String name) {
         this.id = id;
         this.name = name;
-        this.songList = songList;
     }
 
     public Long getId() {
@@ -30,11 +30,4 @@ public class Genre {
         this.name = name;
     }
 
-    public List<Song> getSongList() {
-        return songList;
-    }
-
-    public void setSongList(List<Song> songList) {
-        this.songList = songList;
-    }
 }
