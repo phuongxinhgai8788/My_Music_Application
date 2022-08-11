@@ -12,7 +12,7 @@ import android.util.Log;
 import android.widget.MediaController;
 
 import com.example.mymusicapplication.model.Song;
-import com.example.mymusicapplication.repository.MusicLoader;
+import com.example.mymusicapplication.screens.now_playing.NowPlayingViewModel;
 import com.example.mymusicapplication.repository.StateRepository;
 
 public class MyMusicPlayer implements MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener, MediaController.MediaPlayerControl, AudioManager.OnAudioFocusChangeListener{
@@ -21,7 +21,7 @@ public class MyMusicPlayer implements MediaPlayer.OnPreparedListener, MediaPlaye
         private Context context;
         private MediaPlayer mediaPlayer;
         private StateRepository stateRepository = StateRepository.getInstance();
-        private MusicLoader musicLoader = MusicLoader.getInstance();
+        private NowPlayingViewModel musicLoader = NowPlayingViewModel.getInstance();
 
         private final String TAG = "MyMusicPlayer";
 

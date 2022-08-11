@@ -5,6 +5,8 @@ import android.database.Cursor;
 import android.provider.MediaStore;
 import android.util.Log;
 
+import com.example.mymusicapplication.screens.now_playing.NowPlayingViewModel;
+
 public class SongListLoader {
     private final String TAG = "SongListLoader";
     private Cursor cursor = null;
@@ -30,21 +32,22 @@ public class SongListLoader {
 
         Log.i(TAG, "Querying media...");
 
-        String selection = MusicLoader.DEFAULT_SELECTION;
+        String selection = NowPlayingViewModel.DEFAULT_SELECTION;
         String[] projection = new String[]{
                 MediaStore.Audio.Media._ID,
                 MediaStore.Audio.Media.ARTIST,
                 MediaStore.Audio.Media.TITLE,
                 MediaStore.Audio.Media.DURATION,
                 MediaStore.Audio.Media.DATA,
-                MediaStore.Audio.Media.ALBUM_ID
+                MediaStore.Audio.Media.ALBUM_ID,
+                MediaStore.Audio.Media.ALBUM
         };
         Cursor localCur = context.getContentResolver().query(
                 MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                 projection,
                 selection,
                 null,
-                MusicLoader.DEFAULT_SORT_ORDER);
+                NowPlayingViewModel.DEFAULT_SORT_ORDER);
 
         if (localCur == null) {
             // Query failed...
@@ -64,7 +67,7 @@ public class SongListLoader {
         Log.i(TAG, "Querying media for filter...");
 
         //Some audio may be explicitly marked as not being music
-        String selection = (MusicLoader.DEFAULT_SELECTION + " and "
+        String selection = (NowPlayingViewModel.DEFAULT_SELECTION + " and "
                 + "( " + MediaStore.Audio.Media.ARTIST + " LIKE ? or "
                 + MediaStore.Audio.Media.TITLE + " LIKE ? )");
         String[] projection = new String[]{
@@ -72,13 +75,14 @@ public class SongListLoader {
                 MediaStore.Audio.Media.ARTIST,
                 MediaStore.Audio.Media.TITLE,
                 MediaStore.Audio.Media.DURATION,
-                MediaStore.Audio.Media.ALBUM_ID
+                MediaStore.Audio.Media.ALBUM_ID,
+                MediaStore.Audio.Media.ALBUM
         };
         Cursor cur = context.getContentResolver().query(
                 MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                 projection,
                 selection, new String[]{"%$constraint%", "%$constraint%"},
-                MusicLoader.DEFAULT_SORT_ORDER);
+                NowPlayingViewModel.DEFAULT_SORT_ORDER);
 
         if (cur == null) {
             // Query failed...

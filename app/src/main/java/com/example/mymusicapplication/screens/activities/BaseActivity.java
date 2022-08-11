@@ -15,7 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.mymusicapplication.R;
-import com.example.mymusicapplication.repository.MusicLoader;
+import com.example.mymusicapplication.screens.now_playing.NowPlayingViewModel;
 import com.example.mymusicapplication.repository.SongListLoader;
 import com.example.mymusicapplication.repository.StateRepository;
 import com.example.mymusicapplication.music_player.MyMusicPlayer;
@@ -80,7 +80,7 @@ public class BaseActivity extends AppCompatActivity {
 
     private void setUp(){
         StateRepository.initialize(this);
-        MusicLoader.initialize(this);
+        NowPlayingViewModel.initialize(this);
         SongListLoader.initialize(this);
         MyMusicPlayer.initialize(this);
         initNotificationChannel();

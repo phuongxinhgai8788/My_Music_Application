@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.IBinder;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
@@ -17,7 +16,7 @@ import androidx.core.app.NotificationCompat;
 import com.example.mymusicapplication.R;
 import com.example.mymusicapplication.model.Song;
 import com.example.mymusicapplication.music_player.MyMusicPlayer;
-import com.example.mymusicapplication.repository.MusicLoader;
+import com.example.mymusicapplication.screens.now_playing.NowPlayingViewModel;
 import com.example.mymusicapplication.repository.StateRepository;
 import com.example.mymusicapplication.utils.Constants;
 import com.example.mymusicapplication.utils.MusicNotificationBuilder;
@@ -25,7 +24,7 @@ import com.example.mymusicapplication.utils.MusicNotificationBuilder;
 public class MusicService extends Service implements SharedPreferences.OnSharedPreferenceChangeListener{
 
     private MyMusicPlayer myMusicPlayer = MyMusicPlayer.getInstance();
-    private MusicLoader musicLoader = MusicLoader.getInstance();
+    private NowPlayingViewModel musicLoader = NowPlayingViewModel.getInstance();
     private StateRepository stateRepository = StateRepository.getInstance();
     private MusicNotificationBuilder notificationBuilder;
     private String TAG = "MusicService";

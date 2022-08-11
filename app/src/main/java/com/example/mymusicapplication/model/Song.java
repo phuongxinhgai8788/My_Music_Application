@@ -13,7 +13,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -23,14 +25,18 @@ public class Song implements Serializable {
     private String title;
     private String artist;
     private Long duration;
+    private String album;
     private Long albumId;
+    private List<String> genreList = new ArrayList<>();
 
-    public Song(long id, String title, String artist, long duration, long albumId){
+    public Song(long id, String title, String artist, long duration, String album, Long albumId, List<String> genreList){
         this.id = id;
         this.title = title;
         this.artist = artist;
         this.duration = duration;
+        this.album = album;
         this.albumId = albumId;
+        this.genreList = genreList;
     }
 
     public long getId() {
@@ -57,6 +63,18 @@ public class Song implements Serializable {
         this.artist = artist;
     }
 
+    public void setAlbum(String album) {
+        this.album = album;
+    }
+
+    public Long getAlbumId() {
+        return albumId;
+    }
+
+    public void setAlbumId(Long albumId) {
+        this.albumId = albumId;
+    }
+
     public String getAlbumArtPath = Constants.ALBUM_ART_PATH + albumId;
 
     public String getDurationStr(){
@@ -72,12 +90,20 @@ public class Song implements Serializable {
         this.duration = duration;
     }
 
-    public Long getAlbumId() {
-        return albumId;
+    public String getAlbum() {
+        return album;
     }
 
-    public void setAlbumId(Long albumId) {
-        this.albumId = albumId;
+    public void setAlbumId(String albumId) {
+        this.album = albumId;
+    }
+
+    public List<String> getGenreList() {
+        return genreList;
+    }
+
+    public void setGenreList(List<String> genreList) {
+        this.genreList = genreList;
     }
 
     public Uri getURI(){
@@ -85,15 +111,27 @@ public class Song implements Serializable {
     }
 
     public boolean isUnknownArtist(){
-        return StringUtils.isBlank(artist) || artist.toLowerCase().equals("<unknown>");
+        return StringUtils.isBlank(artist) || artist.equalsIgnoreCase("<unknown>");
     }
 
+    private String getGenreArrayString(){
+        String result = "genres: ";
+        int size = genreList.size();
+        for(int i=0; i<size; i++){
+            result+= genreList.get(i);
+        }
+        return result;
+    }
     @Override
     public String toString() {
         return "Song{" +
-                "title='" + title + '\'' +
+                "id=" + id +
+                ", title='" + title + '\'' +
                 ", artist='" + artist + '\'' +
-                ", duration=" +getDurationStr()+
+                ", duration=" + duration +
+                ", album=" + album +
+                ", genre='" + getGenreArrayString() + '\'' +
+                ", getAlbumArtPath='" + getAlbumArtPath + '\'' +
                 '}';
     }
 }
