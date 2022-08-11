@@ -18,6 +18,7 @@ import com.example.mymusicapplication.R;
 import com.example.mymusicapplication.repository.MyMediaCursor;
 import com.example.mymusicapplication.repository.StateRepository;
 import com.example.mymusicapplication.music_player.MyMusicPlayer;
+import com.example.mymusicapplication.utils.BitmapLoader;
 import com.example.mymusicapplication.utils.Constants;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -81,6 +82,7 @@ public class BaseActivity extends AppCompatActivity {
         StateRepository.initialize(this);
         MyMediaCursor.initialize(this);
         MyMusicPlayer.initialize(this);
+        BitmapLoader.initialize(this);
         initNotificationChannel();
     }
 

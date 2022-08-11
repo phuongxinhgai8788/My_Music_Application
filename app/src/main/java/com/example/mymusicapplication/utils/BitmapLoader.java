@@ -11,8 +11,20 @@ import com.example.mymusicapplication.utils.Constants;
 public class BitmapLoader {
     private Context context;
 
-    public BitmapLoader(Context context){
+    private static BitmapLoader INSTANCE;
+
+    private BitmapLoader(Context context){
         this.context = context;
+    }
+    public static void initialize(Context context){
+        INSTANCE = new BitmapLoader(context);
+    }
+
+    public static BitmapLoader getINSTANCE(){
+        if(INSTANCE == null){
+            throw new IllegalStateException("AlbumArtLoader must be initialized!");
+        }
+        return INSTANCE;
     }
 
     public Bitmap getBitmap(String imagePath){

@@ -59,7 +59,7 @@ public class MyMediaCursor {
 
     }
 
-    public static Cursor getMediaCursorShuffleOn(){
+    public Cursor getMediaCursorShuffleOn(){
         return prepareCursor(true);
     }
 
@@ -71,7 +71,7 @@ public class MyMediaCursor {
         return genresCursor;
     }
 
-    public static Cursor getMediaCursorShuffleOff(){
+    public Cursor getMediaCursorShuffleOff(){
         return prepareCursor(false);
     }
 }
