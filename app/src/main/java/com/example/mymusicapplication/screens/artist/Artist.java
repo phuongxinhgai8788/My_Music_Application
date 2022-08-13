@@ -1,26 +1,17 @@
 package com.example.mymusicapplication.screens.artist;
 
-import com.example.mymusicapplication.model.Song;
-
-import java.util.List;
-
 public class Artist {
 
-    private Long id;
     private String name;
+    private int albumNo;
+    private int songNo;
 
-    public Artist(Long id, String name) {
-        this.id = id;
+    public Artist(String name, int albumNo, int songNo) {
         this.name = name;
+        this.albumNo = albumNo;
+        this.songNo = songNo;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -30,4 +21,28 @@ public class Artist {
         this.name = name;
     }
 
+    public int getAlbumNo() {
+        return albumNo;
+    }
+
+    public void setAlbumNo(int albumNo) {
+        this.albumNo = albumNo;
+    }
+
+    public int getSongNo() {
+        return songNo;
+    }
+
+    public void setSongNo(int songNo) {
+        this.songNo = songNo;
+    }
+
+    @Override
+    public String toString() {
+        return "Artist{" +
+                "name='" + name + '\'' +
+                ", number of album ='" + albumNo + '\'' +
+                ", number of song ='" + songNo + '\'' +
+                '}';
+    }
 }

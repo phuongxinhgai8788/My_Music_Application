@@ -6,22 +6,12 @@ import java.util.List;
 
 public class Genre {
 
-    private Long id;
     private String name;
-    private List<Song> songList;
+    private int songNo;
 
-    public Genre(Long id, String name, List<Song> songList) {
-        this.id = id;
+    public Genre(String name, int songNo) {
         this.name = name;
-        this.songList = songList;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+        this.songNo = songNo;
     }
 
     public String getName() {
@@ -32,11 +22,19 @@ public class Genre {
         this.name = name;
     }
 
-    public List<Song> getSongList() {
-        return songList;
+    public int getSongNo() {
+        return songNo;
     }
 
-    public void setSongList(List<Song> songList) {
-        this.songList = songList;
+    public void setSongNo(int songNo) {
+        this.songNo = songNo;
+    }
+
+    @Override
+    public String toString() {
+        return "Genre{" +
+                "name='" + name + '\'' +
+                ", songNo=" + songNo +
+                '}';
     }
 }

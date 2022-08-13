@@ -1,9 +1,14 @@
-package com.example.mymusicapplication.repository;
+package com.example.mymusicapplication.data_source;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
+
+import com.example.mymusicapplication.screens.playlist_screens.my_playlist.MyPlaylist;
+
+import java.util.ArrayList;
 
 public class MyMediaCursor {
 
@@ -20,11 +25,16 @@ public class MyMediaCursor {
             MediaStore.Audio.Media.TITLE,
             MediaStore.Audio.Media.DURATION,
             MediaStore.Audio.Media.ALBUM,
+            MediaStore.Audio.Media.ALBUM_ID,
             MediaStore.Audio.Media.DATA
     };
     private final String[] genresProjection = {
             MediaStore.Audio.Genres.NAME,
             MediaStore.Audio.Genres._ID
+    };
+
+    private static final String[] playListProjection = new String[] {
+            MediaStore.Audio.Playlists._ID, MediaStore.Audio.Playlists.NAME
     };
 
     private static MyMediaCursor INSTANCE;
@@ -44,7 +54,7 @@ public class MyMediaCursor {
         return INSTANCE;
     }
 
-    private static Cursor prepareCursor(boolean isShuffleOn) {
+    private Cursor prepareMediaCursor(boolean isShuffleOn) {
 
         String selection = DEFAULT_SELECTION;
         String sortOrder = isShuffleOn?"RANDOM()":DEFAULT_SORT_ORDER;
@@ -59,19 +69,48 @@ public class MyMediaCursor {
 
     }
 
-    public static Cursor getMediaCursorShuffleOn(){
-        return prepareCursor(true);
+    public Cursor getMediaCursorShuffleOn(){
+        return prepareMediaCursor(true);
     }
 
-    public Cursor getGenresCursor(int id_column_index){
-        Cursor cursor = prepareCursor(true);
-        int musicId = cursor.getInt(id_column_index);
+    public Cursor getGenresCursor(Cursor mediaCursor){
+        int musicId = Integer.parseInt(mediaCursor.getString(mediaCursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID)));
         Uri uri = MediaStore.Audio.Genres.getContentUriForAudioId("external", musicId);
         genresCursor = context.getContentResolver().query(uri, genresProjection, null, null, null);
         return genresCursor;
     }
 
-    public static Cursor getMediaCursorShuffleOff(){
-        return prepareCursor(false);
+    public Cursor getMediaCursorShuffleOff(){
+        return prepareMediaCursor(false);
+    }
+
+    public Cursor getPlaylistCursor(){
+         Cursor cursor = context.getContentResolver()
+                .query(MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI, playListProjection, null, null,
+                        MediaStore.Audio.Playlists.NAME + " ASC");
+         return cursor;
+    }
+
+    @SuppressLint("Range")
+    public static ArrayList<MyPlaylist> scanPlayList(Context context) {
+        ArrayList<MyPlaylist> playLists = new ArrayList<>();
+        Cursor cursor = context.getContentResolver()
+                .query(MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI, playListProjection, null, null,
+                        MediaStore.Audio.Playlists.NAME + " ASC");
+
+        for (int i = 0; i < cursor.getCount(); i++) {
+            cursor.moveToPosition(i);
+            cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Playlists._ID));
+            cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Playlists.NAME));
+        }
+
+        cursor.close();
+        return playLists;
+    }
+
+    public void closeCursor(){
+        mediaCursorShuffleOff.close();
+        mediaCursorShuffleOn.close();
+        genresCursor.close();
     }
 }

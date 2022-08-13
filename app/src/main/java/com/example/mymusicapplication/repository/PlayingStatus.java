@@ -7,21 +7,21 @@ import android.util.Log;
 
 import com.example.mymusicapplication.utils.Constants;
 
-public class StateRepository {
-    private static StateRepository INSTANCE;
+public class PlayingStatus {
+    private static PlayingStatus INSTANCE;
     private String PREF_SAVE_MUSIC_IS_PLAYING = "preferenceSaveIsPlaying";
     private String TAG = "Repository";
     private Context context;
 
-    private StateRepository(Context context) {
+    private PlayingStatus(Context context) {
         this.context = context;
     }
 
     public static void initialize(Context context) {
-        INSTANCE = new StateRepository(context);
+        INSTANCE = new PlayingStatus(context);
     }
 
-    public static StateRepository getInstance(){
+    public static PlayingStatus getInstance(){
         if(INSTANCE == null){
             throw new IllegalStateException("StateRepository must be initialized!");
         }

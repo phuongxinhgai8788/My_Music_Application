@@ -10,4 +10,7 @@
     <color name="grey">#584645</color>
     <color name="pinky">#916272</color>
     <color name="pinkyy">#E9ABC0</color>
+    <color name="back_ground">#181B2C</color>
+    <color name="orange">#ED8770</color>
+    <color name="purple">#9C8DB8</color>
 </resources>
