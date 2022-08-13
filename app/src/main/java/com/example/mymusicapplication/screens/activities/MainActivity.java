@@ -8,8 +8,7 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.example.mymusicapplication.R;
-//import com.example.mymusicapplication.screens.songs.SongListViewModel;
-//import com.example.mymusicapplication.screens.now_playing_service.MusicService;
+
 import com.example.mymusicapplication.databinding.MainActivityBinding;
 import com.example.mymusicapplication.screens.playlist_screens.PlaylistFragment;
 import com.example.mymusicapplication.screens.playlist_screens.my_playlist.AddMyPlaylistFragment;
