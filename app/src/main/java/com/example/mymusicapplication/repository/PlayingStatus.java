@@ -44,13 +44,13 @@ public class PlayingStatus {
     public void saveMusicIsPlaying(boolean isPlaying){
         PreferenceManager.getDefaultSharedPreferences(context)
                 .edit()
-                .putBoolean(PREF_SAVE_MUSIC_IS_PLAYING, isPlaying)
+                .putBoolean(Constants.PREF_SAVE_MUSIC_IS_PLAYING, isPlaying)
                 .apply();
     }
 
     public boolean getMusicIsPlaying(){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return preferences.getBoolean(PREF_SAVE_MUSIC_IS_PLAYING, false);
+        return preferences.getBoolean(Constants.PREF_SAVE_MUSIC_IS_PLAYING, false);
     }
 
     public boolean getIsShuffleOn(){
@@ -58,37 +58,14 @@ public class PlayingStatus {
         return preferences.getBoolean(Constants.PREF_SAVE_IS_SHUFFLE_ON, false);
     }
 
-    public void saveIsShuffle(boolean isShuffle){
+    public void saveIsShuffleOn(boolean isShuffle){
         PreferenceManager.getDefaultSharedPreferences(context)
                 .edit()
                 .putBoolean(Constants.PREF_SAVE_IS_SHUFFLE_ON, isShuffle)
                 .apply();
     }
 
-    public String getLastPlayedSongTitle() {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return preferences.getString(Constants.PREF_SAVE_LAST_PLAYED_SONG_TITLE, null);
 
-    }
-
-    public void saveLastPlayedSongTitle(String lastPlayedSongTitle){
-        PreferenceManager.getDefaultSharedPreferences(context)
-                .edit()
-                .putString(Constants.PREF_SAVE_LAST_PLAYED_SONG_TITLE, lastPlayedSongTitle)
-                .apply();
-    }
-
-    public String getLastPlayedSongArtist(){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return preferences.getString(Constants.PREF_SAVE_LAST_PLAYED_SONG_ARTIST, null);
-    }
-
-    public void saveLastPlayedSongArtist(String lastPlayedSongArtist){
-        PreferenceManager.getDefaultSharedPreferences(context)
-                .edit()
-                .putString(Constants.PREF_SAVE_LAST_PLAYED_SONG_ARTIST, lastPlayedSongArtist)
-                .apply();
-    }
     public void registerListener(SharedPreferences.OnSharedPreferenceChangeListener listener) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         preferences.registerOnSharedPreferenceChangeListener(listener);
@@ -108,6 +85,18 @@ public class PlayingStatus {
         PreferenceManager.getDefaultSharedPreferences(context)
                 .edit()
                 .putBoolean(Constants.PREF_SAVE_IS_SONG_REPEATED, isRepeated)
+                .apply();
+    }
+
+    public Long getLastPlayedSongId() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getLong(Constants.PREF_SAVE_LAST_PLAYED_SONG_ID, 0);
+    }
+
+    public void saveLastPlayedSongId(Long songId){
+        PreferenceManager.getDefaultSharedPreferences(context)
+                .edit()
+                .putLong(Constants.PREF_SAVE_LAST_PLAYED_SONG_ID, songId)
                 .apply();
     }
 }

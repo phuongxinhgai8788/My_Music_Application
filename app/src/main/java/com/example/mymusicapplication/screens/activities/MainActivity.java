@@ -10,13 +10,15 @@ import androidx.fragment.app.Fragment;
 import com.example.mymusicapplication.R;
 
 import com.example.mymusicapplication.databinding.MainActivityBinding;
+import com.example.mymusicapplication.repository.PlayingStatus;
+import com.example.mymusicapplication.screens.playing_screens.now_playing.NowPlayingFragment;
 import com.example.mymusicapplication.screens.playlist_screens.PlaylistFragment;
 import com.example.mymusicapplication.screens.playlist_screens.my_playlist.AddMyPlaylistFragment;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class MainActivity extends BaseActivity implements PlaylistFragment.openAddMyPlaylistFragment{
+public class MainActivity extends BaseActivity {
 
     private MainActivityBinding binding;
     private static final String TAG = "MainActivity";
@@ -30,27 +32,37 @@ public class MainActivity extends BaseActivity implements PlaylistFragment.openA
         super.onCreate(savedInstanceState);
         binding = MainActivityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container_view);
         if(currentFragment!=null){
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.fragment_container, new PlaylistFragment())
+                    .replace(R.id.fragment_container_view, new NowPlayingFragment())
+                    .addToBackStack(null)
                     .commit();
         }else{
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment_container, new PlaylistFragment())
-                    .addToBackStack(null)
+                    .add(R.id.fragment_container_view, new NowPlayingFragment())
                     .commit();
         }
     }
 
-    @Override
-    public void openAddMyPlaylistFragment() {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.fragment_container, new AddMyPlaylistFragment())
-                .commit();
-    }
-
+//    @Override
+//    public void openAddMyPlaylistFragment() {
+//        getSupportFragmentManager()
+//                .beginTransaction()
+//                .replace(R.id.fragment_container, new AddMyPlaylistFragment())
+//                .addToBackStack(null)
+//                .commit();
+//    }
+//
+//    @Override
+//    public void doSomeThing() {
+//        getSupportFragmentManager()
+//                .beginTransaction()
+//                .replace(R.id.fragment_container, new NowPlayingFragment())
+//                .addToBackStack(null)
+//                .commit();
+//    }
 }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/fragment_home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/home" />
+    <item
+        android:id="@+id/songs_fragment"
+        android:icon="@drawable/ic_songs"
+        android:title="@string/songs" />
+    <item
+        android:id="@+id/setting_fragment"
+        android:icon="@drawable/ic_setting"
+        android:title="@string/setting" />
+</menu>

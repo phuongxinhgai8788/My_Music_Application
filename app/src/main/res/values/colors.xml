@@ -13,4 +13,7 @@
     <color name="back_ground">#181B2C</color>
     <color name="orange">#ED8770</color>
     <color name="purple">#9C8DB8</color>
+    <color name="background">#181B2C</color>
+    <color name="sub_color">#AD9593</color>
+    <color name="search_background">#292E4B</color>
 </resources>

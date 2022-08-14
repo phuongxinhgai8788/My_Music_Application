@@ -15,4 +15,14 @@
     <string name="view_all">View All</string>
     <string name="add_play_list_name">Add playlist name</string>
     <string name="choose_song">Choose song</string>
+    <string name="Playlists">Playlists</string>
+    <string name="home">Home</string>
+    <string name="songs">Songs</string>
+    <string name="hot_recommended">Hot recommended</string>
+    <string name="playlist">Playlist</string>
+    <string name="recently_played">Recently Played</string>
+    <string name="song_no">"328\nSongs"</string>
+    <string name="artist_no">87\nArtists</string>
+    <string name="album_no">52\nAlbums</string>
+    <string name="setting">Setting</string>
 </resources>

@@ -3,20 +3,35 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/My_Music_Application/app/src/main/res/drawable/ic_burger.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/My_Music_Application/app/src/main/res/drawable/ic_circle_seekbar.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/My_Music_Application/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/My_Music_Application/app/src/main/res/layout/album_item.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/My_Music_Application/app/src/main/res/layout/artist_item.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/My_Music_Application/app/src/main/res/layout/default_playlist_item.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/My_Music_Application/app/src/main/res/layout/dropdown_item.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/My_Music_Application/app/src/main/res/layout/fragment_add_playlist.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/My_Music_Application/app/src/main/res/layout/fragment_album_list.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/My_Music_Application/app/src/main/res/layout/fragment_artists_list.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/My_Music_Application/app/src/main/res/layout/fragment_genre_list.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/My_Music_Application/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/My_Music_Application/app/src/main/res/layout/fragment_now__playing.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/My_Music_Application/app/src/main/res/layout/fragment_now_playing.xml" value="0.22" />
         <entry key="..\:/AndroidStudioProjects/My_Music_Application/app/src/main/res/layout/fragment_playlist.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/My_Music_Application/app/src/main/res/layout/fragment_recent_played.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/My_Music_Application/app/src/main/res/layout/fragment_song_detail.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/My_Music_Application/app/src/main/res/layout/fragment_song_list.xml" value="0.1" />
-        <entry key="..\:/AndroidStudioProjects/My_Music_Application/app/src/main/res/layout/main_activity.xml" value="0.18854166666666666" />
+        <entry key="..\:/AndroidStudioProjects/My_Music_Application/app/src/main/res/layout/fragment_songs.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/My_Music_Application/app/src/main/res/layout/fragment_songs2.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/My_Music_Application/app/src/main/res/layout/genre_item.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/My_Music_Application/app/src/main/res/layout/main_activity.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/My_Music_Application/app/src/main/res/layout/menu_header.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/My_Music_Application/app/src/main/res/layout/my_playlist_item.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/My_Music_Application/app/src/main/res/layout/playlist_item.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/My_Music_Application/app/src/main/res/layout/song_item.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/My_Music_Application/app/src/main/res/layout/splash_activity.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/My_Music_Application/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/My_Music_Application/app/src/main/res/menu/side_menu.xml" value="0.1" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/MyMusicApplication/app/src/main/res/drawable/avatar_background.xml" value="0.1" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/MyMusicApplication/app/src/main/res/drawable/avatar_transparent_background.xml" value="0.1" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/MyMusicApplication/app/src/main/res/drawable/background_field.xml" value="0.1" />

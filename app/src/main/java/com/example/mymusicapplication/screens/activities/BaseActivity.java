@@ -16,6 +16,7 @@ import android.util.Log;
 
 import com.example.mymusicapplication.R;
 import com.example.mymusicapplication.data_source.MyMediaCursor;
+import com.example.mymusicapplication.music_player.MyMusicPlayer;
 import com.example.mymusicapplication.repository.PlayingStatus;
 import com.example.mymusicapplication.repository.SongStatus;
 import com.example.mymusicapplication.utils.Constants;
@@ -81,7 +82,7 @@ public class BaseActivity extends AppCompatActivity {
         PlayingStatus.initialize(this);
         MyMediaCursor.initialize(this);
         SongStatus.initialize(this);
-//        MyMusicPlayer.initialize(this);
+        MyMusicPlayer.initialize(this);
         initNotificationChannel();
     }
 
