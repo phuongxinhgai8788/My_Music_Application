@@ -1,4 +1,4 @@
-package com.example.mymusicapplication.screens.artist;
+package com.example.mymusicapplication.screens.songs.artists;
 
 import android.annotation.SuppressLint;
 import android.database.Cursor;
@@ -8,6 +8,7 @@ import android.provider.MediaStore;
 import androidx.annotation.RequiresApi;
 
 import com.example.mymusicapplication.data_source.MyMediaCursor;
+import com.example.mymusicapplication.screens.songs.artists.Artist;
 
 import java.util.ArrayList;
 import java.util.List;

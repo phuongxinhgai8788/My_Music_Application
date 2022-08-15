@@ -14,6 +14,15 @@
     <color name="orange">#ED8770</color>
     <color name="purple">#9C8DB8</color>
     <color name="background">#181B2C</color>
+    <color name="h585A66">#585A66</color>
+    <color name="h181B2C">#181B2C</color>
+    <color name="white_alpha">#65FFFFFF</color>
     <color name="sub_color">#AD9593</color>
     <color name="search_background">#292E4B</color>
+    <color name="bg_bottom_bar">#151827</color>
+    <color name="selected_color">#D9519D</color>
+    <color name="normal_selected_color">#63666E</color>
+    <color name="hEEEEEE">#EEEEEE</color>
+    <color name="hC1C0C0">#C1C0C0</color>
+    <color name="h383B49">#383B49</color>
 </resources>

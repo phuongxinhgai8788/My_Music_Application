@@ -10,8 +10,8 @@ import android.support.v4.media.session.MediaSessionCompat;
 import androidx.core.app.NotificationCompat;
 
 import com.example.mymusicapplication.R;
-import com.example.mymusicapplication.screens.playing_screens.NowPlaying;
 import com.example.mymusicapplication.service.MusicService;
+import com.example.mymusicapplication.service.NowPlaying;
 
 public class MusicNotificationBuilder {
 
@@ -34,7 +34,7 @@ public class MusicNotificationBuilder {
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC) // Add media control buttons that invoke intents in your media service
                 .addAction(R.drawable.ic_stop, null, getPendingIntent(context, Constants.ACTION_CLEAR_NOTIFICATION))
                 .addAction(R.drawable.ic_play_prev, null, getPendingIntent(context, Constants.ACTION_PLAY_PREVIOUS))
-                .addAction(playPauseIcon, null, getPendingIntent(context, Constants.ACTION_PLAY_PAUSE_RESUME))
+                .addAction(playPauseIcon, null, getPendingIntent(context, Constants.ACTION_PAUSE_RESUME))
                 .addAction(R.drawable.ic_play_next, null, getPendingIntent(context, Constants.ACTION_PLAY_NEXT))
                 .addAction(repeatIcon, null, getPendingIntent(context, Constants.ACTION_TOGGLE_REPEAT))
                 .setLargeIcon(thumbnailBitmap)

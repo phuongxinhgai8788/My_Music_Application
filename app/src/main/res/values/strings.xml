@@ -25,4 +25,22 @@
     <string name="artist_no">87\nArtists</string>
     <string name="album_no">52\nAlbums</string>
     <string name="setting">Setting</string>
+    <string name="search_album_song">search album song</string>
+    <string name="all_song">All songs</string>
+    <string name="albums">Albums</string>
+    <string name="artists">Artists</string>
+    <string name="genres">Genres</string>
+    <string name="my_top_tracks">My Top Tracks</string>
+    <string name="latest_added">Latest Added</string>
+    <string name="history">History</string>
+    <string name="favourites">Favourites</string>
+    <string name="play">Play</string>
+    <string name="play_next">Play next</string>
+    <string name="add_to_playing_queue">Add to playing queue</string>
+    <string name="add_to_playlist">Add to playlist</string>
+    <string name="rename">Rename</string>
+    <string name="tag_editor">Tag editor</string>
+    <string name="go_to_artist">Go to artist</string>
+    <string name="delete_from_device">Delete from device</string>
+    <string name="share">Share</string>
 </resources>

@@ -6,8 +6,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 
-import com.example.mymusicapplication.screens.playlist_screens.my_playlist.MyPlaylist;
-
 import java.util.ArrayList;
 
 public class MyMediaCursor {
@@ -49,7 +47,7 @@ public class MyMediaCursor {
 
     public static MyMediaCursor getInstance() {
         if (INSTANCE == null) {
-            throw new IllegalStateException("Music Loader must be initialized");
+            throw new IllegalStateException("MyMediaCursor must be initialized");
         }
         return INSTANCE;
     }
@@ -91,22 +89,6 @@ public class MyMediaCursor {
          return cursor;
     }
 
-    @SuppressLint("Range")
-    public static ArrayList<MyPlaylist> scanPlayList(Context context) {
-        ArrayList<MyPlaylist> playLists = new ArrayList<>();
-        Cursor cursor = context.getContentResolver()
-                .query(MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI, playListProjection, null, null,
-                        MediaStore.Audio.Playlists.NAME + " ASC");
-
-        for (int i = 0; i < cursor.getCount(); i++) {
-            cursor.moveToPosition(i);
-            cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Playlists._ID));
-            cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Playlists.NAME));
-        }
-
-        cursor.close();
-        return playLists;
-    }
 
     public void closeCursor(){
         mediaCursorShuffleOff.close();

@@ -4,9 +4,6 @@ import android.content.ContentUris;
 import android.net.Uri;
 import android.provider.MediaStore;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DiffUtil;
-
 import com.example.mymusicapplication.utils.Constants;
 
 import org.apache.commons.lang3.StringUtils;
@@ -17,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
+
 
 public class Song implements Serializable {
 
@@ -27,9 +24,10 @@ public class Song implements Serializable {
     private Long duration;
     private String album;
     private Long albumId;
+    private int image;
     private List<String> genreList = new ArrayList<>();
 
-    public Song(long id, String title, String artist, long duration, String album, Long albumId, List<String> genreList){
+    public Song(long id, String title, String artist, long duration, String album, Long albumId, List<String> genreList,int image){
         this.id = id;
         this.title = title;
         this.artist = artist;
@@ -37,6 +35,7 @@ public class Song implements Serializable {
         this.album = album;
         this.albumId = albumId;
         this.genreList = genreList;
+        this.image = image;
     }
 
     public long getId() {
@@ -112,6 +111,14 @@ public class Song implements Serializable {
 
     public boolean isUnknownArtist(){
         return StringUtils.isBlank(artist) || artist.equalsIgnoreCase("<unknown>");
+    }
+
+    public int getImage() {
+        return image;
+    }
+
+    public void setImage(int image) {
+        this.image = image;
     }
 
     private String getGenreArrayString(){

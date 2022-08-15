@@ -1,18 +1,17 @@
-package com.example.mymusicapplication.screens.genre;
+package com.example.mymusicapplication.screens.songs.artists;
 
-import com.example.mymusicapplication.model.Song;
-
-import java.util.List;
-
-public class Genre {
+public class Artist {
 
     private String name;
+    private int albumNo;
     private int songNo;
 
-    public Genre(String name, int songNo) {
+    public Artist(String name, int albumNo, int songNo) {
         this.name = name;
+        this.albumNo = albumNo;
         this.songNo = songNo;
     }
+
 
     public String getName() {
         return name;
@@ -20,6 +19,14 @@ public class Genre {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getAlbumNo() {
+        return albumNo;
+    }
+
+    public void setAlbumNo(int albumNo) {
+        this.albumNo = albumNo;
     }
 
     public int getSongNo() {
@@ -32,9 +39,10 @@ public class Genre {
 
     @Override
     public String toString() {
-        return "Genre{" +
+        return "Artist{" +
                 "name='" + name + '\'' +
-                ", songNo=" + songNo +
+                ", number of album ='" + albumNo + '\'' +
+                ", number of song ='" + songNo + '\'' +
                 '}';
     }
 }

@@ -1,7 +1,6 @@
-package com.example.mymusicapplication.screens.playing_screens.now_playing;
+package com.example.mymusicapplication.screens.songs.all_songs.now_playing;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Build;
@@ -12,9 +11,9 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,27 +22,20 @@ import com.example.mymusicapplication.R;
 import com.example.mymusicapplication.data_source.MyMediaCursor;
 import com.example.mymusicapplication.databinding.FragmentNowPlayingBinding;
 import com.example.mymusicapplication.repository.PlayingStatus;
-import com.example.mymusicapplication.screens.playing_screens.NowPlayingViewModel;
-import com.example.mymusicapplication.service.MusicService;
 import com.example.mymusicapplication.utils.Constants;
 
-public class NowPlayingFragment extends Fragment implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class FragmentNowPlaying extends Fragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private FragmentNowPlayingBinding binding;
-    private NowPlayingViewModel nowPlayingViewModel;
     private PlayingStatus playingStatus = PlayingStatus.getInstance();
-    private Callback callback;
     private String TAG = "NowPlayingFragment";
-
-    public interface Callback{
-        void doSomeThing();
-    }
-    public NowPlayingFragment() {
+    
+    public FragmentNowPlaying() {
         // Required empty public constructor
     }
 
-    public static NowPlayingFragment newInstance(String param1, String param2) {
-        NowPlayingFragment fragment = new NowPlayingFragment();
+    public static FragmentNowPlaying newInstance(String param1, String param2) {
+        FragmentNowPlaying fragment = new FragmentNowPlaying();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -61,7 +53,6 @@ public class NowPlayingFragment extends Fragment implements SharedPreferences.On
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        callback = (Callback) context;
     }
 
     @Override
@@ -77,41 +68,16 @@ public class NowPlayingFragment extends Fragment implements SharedPreferences.On
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        nowPlayingViewModel = new NowPlayingViewModel();
-        binding.setLifecycleOwner(getViewLifecycleOwner());
-        binding.setViewModel(nowPlayingViewModel);
-        binding.executePendingBindings();
-//        initData();
+        binding.nowPlayingContainer.setAdapter(new NowPlayingAdapter(new NowPlayingViewModel(), getContext()));
+        binding.nowPlayingContainer.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onStart() {
         super.onStart();
-
-        binding.playNextBtn.setOnClickListener(view -> {
-            startForegroundService(Constants.ACTION_PLAY_NEXT);
-        });
-        binding.playPrevBtn.setOnClickListener(view -> {
-            startForegroundService(Constants.ACTION_PLAY_PREVIOUS);
-        });
-        binding.playBtn.setOnClickListener(view -> {
-                startForegroundService(Constants.ACTION_PLAY_PAUSE_RESUME);
-        });
-        if(nowPlayingViewModel.getMusicIsPlaying()){
-            binding.playBtn.setImageResource(R.drawable.ic_pause);
-        }else{
-            binding.playBtn.setImageResource(R.drawable.ic_play);
-        }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private void startForegroundService(String action){
-        Log.i(TAG, "startForeground");
-        Intent intent = new Intent(getContext(), MusicService.class);
-        intent.setAction(action);
-        getContext().startForegroundService(intent);
-    }
     private void initData() {
         Cursor cursor = MyMediaCursor.getInstance().getMediaCursorShuffleOff();
         if(cursor.moveToFirst()){
@@ -127,9 +93,13 @@ public class NowPlayingFragment extends Fragment implements SharedPreferences.On
                 || s.equals(Constants.PREF_SAVE_MUSIC_IS_PLAYING)
                 || s.equals(Constants.PREF_SAVE_IS_SONG_REPEATED)
                 || s.equals(Constants.PREF_SAVE_IS_SHUFFLE_ON)) {
-            Log.i(TAG, "I can hear your changes");
-            callback.doSomeThing();
+            updateUI();
         }
+    }
+
+    private void updateUI() {
+        NowPlayingAdapter nowPlayingAdapter = new NowPlayingAdapter(new NowPlayingViewModel(), getContext());
+        binding.nowPlayingContainer.setAdapter(nowPlayingAdapter);
     }
 
     @Override
@@ -137,4 +107,5 @@ public class NowPlayingFragment extends Fragment implements SharedPreferences.On
         super.onDestroy();
         playingStatus.unregisterListener(this);
     }
+
 }

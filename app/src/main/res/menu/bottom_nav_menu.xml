@@ -3,15 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/fragment_home"
+        android:id="@+id/fragmentHome"
         android:icon="@drawable/ic_home"
         android:title="@string/home" />
     <item
-        android:id="@+id/songs_fragment"
-        android:icon="@drawable/ic_songs"
+        android:id="@+id/fragmentSong"
+        android:icon="@drawable/ic_song"
         android:title="@string/songs" />
     <item
-        android:id="@+id/setting_fragment"
+        android:id="@+id/fragmentSetting"
         android:icon="@drawable/ic_setting"
         android:title="@string/setting" />
 </menu>

@@ -1,28 +1,18 @@
-package com.example.mymusicapplication.screens.playing_screens;
+package com.example.mymusicapplication.screens.songs.all_songs.now_playing;
 
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.provider.MediaStore;
-import android.util.Log;
 
 import androidx.databinding.BaseObservable;
-import androidx.databinding.Bindable;
-import androidx.databinding.library.baseAdapters.BR;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.example.mymusicapplication.data_source.MyMediaCursor;
-import com.example.mymusicapplication.music_player.MyMusicPlayer;
 import com.example.mymusicapplication.repository.PlayingStatus;
-import com.example.mymusicapplication.utils.Constants;
 
-import java.util.UUID;
-
-public class NowPlayingViewModel extends BaseObservable implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class NowPlayingViewModel extends BaseObservable{
 
     private static final String TAG = "NowPlayingViewModel";
     private NowPlaying nowPlaying;
-    private MyMusicPlayer myMusicPlayer = MyMusicPlayer.getInstance();
     private MyMediaCursor myMediaCursor = MyMediaCursor.getInstance();
     private PlayingStatus playingStatus = PlayingStatus.getInstance();
     private Cursor cursor;
@@ -41,82 +31,11 @@ public class NowPlayingViewModel extends BaseObservable implements SharedPrefere
         initData();
     }
 
-    ////////////////////METHODS FOR CONTROLLING MUSIC\\\\\\\\\\\\\\\\\\\\\
-
-    public void handleToggleShuffle() {
-        nowPlaying.setShuffleOn(!nowPlaying.isShuffleOn());
-        playingStatus.saveIsShuffleOn(!playingStatus.getIsShuffleOn());
-        setIsShuffleOn(playingStatus.getIsShuffleOn());
-        initCursor();
-    }
-
-    public void playPrev() {
-        playingStatus.saveMusicIsPlaying(true);
-        playingStatus.savePlayedSongPosition(0);
-        long prevSongId = getPrevSongId();
-        playingStatus.saveLastPlayedSongId(prevSongId);
-        initData();
-        myMusicPlayer.prepareSong(prevSongId);
-    }
-
-    public void playNext() {
-        playingStatus.saveMusicIsPlaying(true);
-        playingStatus.savePlayedSongPosition(0);
-        long nextSongId = getNextSongId();
-        playingStatus.saveLastPlayedSongId(nextSongId);
-        initData();
-        myMusicPlayer.prepareSong(nextSongId);
-    }
-
-//    public boolean getMusicIsPlaying() {
-//        return playingStatus.getMusicIsPlaying();
-//    }
-//
-//    public int getPlayedSongPosition() {
-//        return playingStatus.getPlayedSongPosition();
-//    }
-
-    public void resume() {
-        playingStatus.saveMusicIsPlaying(true);
-        myMusicPlayer.resume(playingStatus.getPlayedSongPosition());
-    }
-
-    public void prepareSong() {
-        myMusicPlayer.prepareSong(playingStatus.getLastPlayedSongId());
-        playingStatus.saveMusicIsPlaying(true);
-    }
-
-    public void pause() {
-        myMusicPlayer.pause();
-        playingStatus.saveMusicIsPlaying(false);
-        playingStatus.savePlayedSongPosition(myMusicPlayer.getCurrentPosition());
-    }
-
-    public void toggleRepeat() {
-        playingStatus.saveIsSongRepeated(!playingStatus.getIsSongRepeated());
-        nowPlaying.setRepeated(playingStatus.getIsSongRepeated());
-    }
-
-    ////////////////////METHOD FOR NOTIFICATION\\\\\\\\\\\\\\\\\\\\\
-
-    public NowPlaying getCurrentNowPlaying() {
-        initData();
-        return nowPlaying;
-    }
 
     public boolean getMusicIsPlaying() {
         return playingStatus.getMusicIsPlaying();
     }
 
-    public Boolean getIsSongRepeated() {
-        return playingStatus.getIsSongRepeated();
-    }
-
-    ////////////////////METHOD LISTEN TO CHANGES\\\\\\\\\\\\\\\\\\\\\
-
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
-    }
 
     ////////////////////METHODS FOR BINDING\\\\\\\\\\\\\\\\\\\\\
     public Long getSongId(){
@@ -170,14 +89,15 @@ public class NowPlayingViewModel extends BaseObservable implements SharedPrefere
     public boolean getIsShuffleOn(){
         return isShuffleOnMutable.getValue();
     }
+
     public void setIsShuffleOn(Boolean isShuffleOn) {
         this.isShuffleOnMutable.setValue(isShuffleOn);
     }
 
-
     public boolean getIsRepeated(){
         return isRepeatedMutable.getValue();
     }
+
     public void setIsRepeated(Boolean isRepeated) {
         this.isRepeatedMutable.setValue(isRepeated);
     }
@@ -196,8 +116,6 @@ public class NowPlayingViewModel extends BaseObservable implements SharedPrefere
         return minute+":"+secondLeft;
     }
 
-    public void setCurrentPositionString(){
-    }
 
     /////////////// PRIVATE HELPER METHODS \\\\\\\\\\\\\\\
 
@@ -261,40 +179,6 @@ public class NowPlayingViewModel extends BaseObservable implements SharedPrefere
             return null;
         }
 
-    private long getPrevSongId() {
-        if(cursor.moveToFirst()){
-            do{
-                long songId = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID));
-                if(playingStatus.getLastPlayedSongId()==songId){
-                    if(cursor.moveToPrevious()){
-                        return cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID));
-                    }else{
-                        cursor.moveToLast();
-                        return cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID));
-                    }
-                }
-            }while(cursor.moveToNext());
-        }
-        return 0;
-    }
-
-    private long getNextSongId() {
-        if(cursor.moveToFirst()){
-            do{
-                long songId = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID));
-                if(playingStatus.getLastPlayedSongId()==songId){
-                    if(cursor.moveToNext()){
-                        return cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID));
-                    }else{
-                        cursor.moveToFirst();
-                        return cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID));
-                    }
-                }
-            }while(cursor.moveToNext());
-        }
-        return 0;
-    }
-
     /////////////// METHODS FOR INITIALIZING DATA\\\\\\\\\\\\\\\
 
     public NowPlaying initData(){
@@ -331,12 +215,4 @@ public class NowPlayingViewModel extends BaseObservable implements SharedPrefere
         this.cursor = playingStatus.getIsShuffleOn()?myMediaCursor.getMediaCursorShuffleOn(): myMediaCursor.getMediaCursorShuffleOff();
     }
 
-    public int getPlayedSongPosition() {
-        return playingStatus.getPlayedSongPosition();
-    }
-
-    public void turnOffMusic() {
-        myMusicPlayer.stop();
-        myMusicPlayer.release();
-    }
 }

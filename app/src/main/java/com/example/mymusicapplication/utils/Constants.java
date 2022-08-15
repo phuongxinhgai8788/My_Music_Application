@@ -4,7 +4,7 @@ package com.example.mymusicapplication.utils;
 public class Constants {
 
     public static final String ACTION_CHANGE_SONG_DETAIL = "ACTION_CHANGE_SONG_DETAIL";
-    public static final String ACTION_PLAY_PAUSE_RESUME = "ACTION_PLAY";
+    public static final String ACTION_PAUSE_RESUME = "ACTION_PLAY";
     public static final String ACTION_PLAY_PREVIOUS = "ACTION_PLAY_PREVIOUS";
     public static final String ACTION_PLAY_NEXT = "ACTION_PLAY_NEXT";
 
@@ -26,4 +26,7 @@ public class Constants {
     public static final String PREF_SAVE_IS_SONG_REPEATED = "PREF_SAVE_IS_SONG_REPEATED";
     public static final String PREF_SAVE_LAST_PLAYED_SONG_ID = "PREF_SAVE_LAST_PLAYED_SONG_ID";
     public static final String PREF_SAVE_MUSIC_IS_PLAYING = "PREF_SAVE_MUSIC_IS_PLAYING";
+
+    public static final String KEY_SONG = "key_song";
+
 }

@@ -141,18 +141,27 @@ public class MyMusicPlayer implements MediaPlayer.OnPreparedListener, MediaPlaye
         @Override
         public void onCompletion(MediaPlayer mediaPlayer) {
             Log.i(TAG, "onCompletion");
-            playingStatus.savePlayedSongPosition(0);
             playingStatus.saveLastPlayedSongId(getNextSongId());
             prepareSong(playingStatus.getLastPlayedSongId());
         }
 
         public void resume(int currentPlayedPosition) {
-            mediaPlayer.seekTo(currentPlayedPosition);
-            mediaPlayer.start();
+
+            if(mediaPlayer.getDuration()!=0) {
+                mediaPlayer.start();
+                mediaPlayer.seekTo(currentPlayedPosition);
+            }else{
+                prepareSong(playingStatus.getLastPlayedSongId());
+                mediaPlayer.seekTo(playingStatus.getPlayedSongPosition());
+            }
+
         }
 
     public void stop() {
-            mediaPlayer.stop();
+        playingStatus.saveMusicIsPlaying(false);
+        playingStatus.saveLastPlayedSongId(playingStatus.getLastPlayedSongId());
+        playingStatus.savePlayedSongPosition(getCurrentPosition());
+        mediaPlayer.stop();
     }
 
     public void release() {

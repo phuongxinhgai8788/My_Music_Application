@@ -1,4 +1,4 @@
-package com.example.mymusicapplication.screens.album;
+package com.example.mymusicapplication.screens.songs.albums;
 
 public class Album {
     private Long id;
