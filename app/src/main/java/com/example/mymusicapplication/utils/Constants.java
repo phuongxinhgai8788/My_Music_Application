@@ -29,4 +29,21 @@ public class Constants {
 
     public static final String KEY_SONG = "key_song";
 
+    //constant setting
+    public static final int DISPLAY = 001;
+    public static final int AUDIO = 002;
+    public static final int HEAD_SET = 003;
+    public static final int LOCK_SCREEN = 004;
+    public static final int ADVANCED = 005;
+    public static final int OTHER = 006;
+
+    //constant header
+    public static final int THEMES = 0001;
+    public static final int RINGTONE_CUTTER = 0002;
+    public static final int SLEEP_TIME = 0003;
+    public static final int EQULISER = 0004;
+    public static final int DRIVE_MODE = 0005;
+    public static final int HIDDEN_FOLDER = 0006;
+    public static final int SCAN_MEDIA = 0007;
+
 }

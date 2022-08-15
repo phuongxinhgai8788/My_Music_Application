@@ -43,4 +43,19 @@
     <string name="go_to_artist">Go to artist</string>
     <string name="delete_from_device">Delete from device</string>
     <string name="share">Share</string>
+    <string name="display">Display</string>
+    <string name="audio">Audio</string>
+    <string name="head_set">Headset</string>
+    <string name="lockscreen">LockScreen</string>
+    <string name="advanced">Advanced</string>
+    <string name="other">Other</string>
+    <string name="album_details">Album Details</string>
+    <string name="music">Muzic</string>
+    <string name="themes">Themes</string>
+    <string name="ringtone_cutter">Ringtone Cutter</string>
+    <string name="sleep_time">Sleep Time</string>
+    <string name="equliser">Equliser</string>
+    <string name="drive_mode">Drive Mode</string>
+    <string name="hidden_folder">Hidden Folder</string>
+    <string name="scan_media">Scan Media</string>
 </resources>
