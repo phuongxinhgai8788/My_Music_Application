@@ -1,93 +1,40 @@
-//package com.example.mymusicapplication.screens.songs;
-//
-//import android.content.Context;
-//import android.database.Cursor;
-//import android.provider.MediaStore;
-//import android.util.Log;
-//
-//public class SongListViewModel {
-//    private final String TAG = "SongListLoader";
-//    private Cursor cursor = null;
-//    private Context context;
-//    private static SongListViewModel INSTANCE;
-//
-//    private SongListViewModel(Context context){
-//        this.context = context;
-//    }
-//
-//    public static void initialize(Context context){
-//        INSTANCE = new SongListViewModel(context);
-//    }
-//
-//    public static SongListViewModel getInstance(){
-//        if(INSTANCE == null){
-//            throw new IllegalStateException("SongListLoader must be initialized!");
-//        }
-//        return INSTANCE;
-//    }
-//
-//    public Cursor getCursor(){
-//
-//        Log.i(TAG, "Querying media...");
-//
-//        String selection = NowPlayingViewModel.DEFAULT_SELECTION;
-//        String[] projection = new String[]{
-//                MediaStore.Audio.Media._ID,
-//                MediaStore.Audio.Media.ARTIST,
-//                MediaStore.Audio.Media.TITLE,
-//                MediaStore.Audio.Media.DURATION,
-//                MediaStore.Audio.Media.DATA,
-//                MediaStore.Audio.Media.ALBUM_ID,
-//                MediaStore.Audio.Media.ALBUM
-//        };
-//        Cursor localCur = context.getContentResolver().query(
-//                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-//                projection,
-//                selection,
-//                null,
-//                NowPlayingViewModel.DEFAULT_SORT_ORDER);
-//
-//        if (localCur == null) {
-//            // Query failed...
-//            Log.e(TAG, "Failed to retrieve music: cursor is null");
-//        } else if (localCur.getCount() == 0) {
-//            Log.e(TAG, "Failed to retrieve music: no music found");
-//            localCur.close();
-//            localCur = null;
-//        } else {
-//            Log.i(TAG, "Done querying media. SongListLoader is ready.");
-//        }
-//        cursor = localCur;
-//        return cursor;
-//    }
-//
-//    public Cursor getFilteredCursor(CharSequence constraint) {
-//        Log.i(TAG, "Querying media for filter...");
-//
-//        //Some audio may be explicitly marked as not being music
-//        String selection = (NowPlayingViewModel.DEFAULT_SELECTION + " and "
-//                + "( " + MediaStore.Audio.Media.ARTIST + " LIKE ? or "
-//                + MediaStore.Audio.Media.TITLE + " LIKE ? )");
-//        String[] projection = new String[]{
-//                MediaStore.Audio.Media._ID,
-//                MediaStore.Audio.Media.ARTIST,
-//                MediaStore.Audio.Media.TITLE,
-//                MediaStore.Audio.Media.DURATION,
-//                MediaStore.Audio.Media.ALBUM_ID,
-//                MediaStore.Audio.Media.ALBUM
-//        };
-//        Cursor cur = context.getContentResolver().query(
-//                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-//                projection,
-//                selection, new String[]{"%$constraint%", "%$constraint%"},
-//                NowPlayingViewModel.DEFAULT_SORT_ORDER);
-//
-//        if (cur == null) {
-//            // Query failed...
-//            Log.e(TAG, "Failed to retrieve music: cursor is null");
-//        } else {
-//            Log.i(TAG, "Done querying media. SongListLoader is ready.");
-//        }
-//        return cur;
-//    }
-//}
+package com.example.mymusicapplication.screens.songs.all_songs;
+
+import android.annotation.SuppressLint;
+import android.database.Cursor;
+import android.provider.MediaStore;
+
+import com.example.mymusicapplication.data_source.MyMediaCursor;
+import com.example.mymusicapplication.repository.PlayingStatus;
+import com.example.mymusicapplication.utils.Constants;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class SongListViewModel {
+    private final String TAG = "SongListLoader";
+
+    private PlayingStatus playingStatus = PlayingStatus.getInstance();
+    private MyMediaCursor myMediaCursor = MyMediaCursor.getInstance();
+
+    private List<SongItem> songItemList = new ArrayList<>();
+
+    public SongListViewModel(){
+
+    }
+
+    public List<SongItem> getSongItemList(){
+        Cursor cursor = playingStatus.getIsShuffleOn()? myMediaCursor.getMediaCursorShuffleOn(): myMediaCursor.getMediaCursorShuffleOff();
+        if(cursor.moveToFirst()){
+            do{
+                @SuppressLint("Range") String title = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE));
+                @SuppressLint("Range") String artist = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST));
+                @SuppressLint("Range") long id = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media._ID));
+                @SuppressLint("Range") long albumId = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID));
+                songItemList.add(new SongItem(id, title, artist, Constants.ALBUM_ART_PATH+albumId));
+
+            }while(cursor.moveToNext());
+        }
+        return songItemList;
+    }
+}

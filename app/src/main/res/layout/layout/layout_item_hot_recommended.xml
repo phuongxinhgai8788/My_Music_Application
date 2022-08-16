@@ -4,8 +4,8 @@
 
     <data>
         <variable
-            name="song"
-            type="com.example.mymusicapplication.model.Song" />
+            name="hotrecommend"
+            type="com.example.mymusicapplication.screens.home.hot_recommended.HotRecommended" />
     </data>
 
     <LinearLayout
@@ -25,17 +25,17 @@
             android:background="@color/h181B2C"
             android:layout_width="@dimen/_200sdp"
             android:layout_height="@dimen/_125sdp"
-            app:setUrlImage="@{song.image}"
+            app:setUrlImage="@{hotrecommend.image}"
             />
 
         <TextView
             style="@style/TextNormal"
-            android:text="@{song.title}"
+            android:text="@{hotrecommend.name}"
             android:layout_marginTop="@dimen/_15sdp"/>
 
         <TextView
             style="@style/TextMedium"
-            android:text="@{song.artist}"
+            android:text="@{hotrecommend.artist}"
             android:textColor="@color/h585A66"
             android:layout_marginTop="@dimen/_3sdp"/>
     </LinearLayout>

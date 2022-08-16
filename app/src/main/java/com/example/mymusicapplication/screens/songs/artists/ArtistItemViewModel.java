@@ -7,13 +7,14 @@ import android.provider.MediaStore;
 
 import androidx.annotation.RequiresApi;
 
+import com.example.mymusicapplication.base.BaseViewModel;
 import com.example.mymusicapplication.data_source.MyMediaCursor;
 import com.example.mymusicapplication.screens.songs.artists.Artist;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArtistViewModel {
+public class ArtistListViewModel extends BaseViewModel {
 
     private static final String TAG = "ArtistViewModel";
     private Cursor cursor = MyMediaCursor.getInstance().getMediaCursorShuffleOff();

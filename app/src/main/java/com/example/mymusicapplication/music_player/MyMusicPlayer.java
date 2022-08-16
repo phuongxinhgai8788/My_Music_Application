@@ -7,6 +7,7 @@ import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Handler;
 import android.os.PowerManager;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.widget.MediaController;
 
 import com.example.mymusicapplication.data_source.MyMediaCursor;
 import com.example.mymusicapplication.repository.PlayingStatus;
+import com.example.mymusicapplication.screens.activities.MainActivity;
 
 public class MyMusicPlayer implements MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener, MediaController.MediaPlayerControl, AudioManager.OnAudioFocusChangeListener{
 
@@ -169,21 +171,21 @@ public class MyMusicPlayer implements MediaPlayer.OnPreparedListener, MediaPlaye
     }
 
     private long getNextSongId() {
-            Cursor cursor = playingStatus.getIsShuffleOn()?myMediaCursor.getMediaCursorShuffleOn():myMediaCursor.getMediaCursorShuffleOff();
-        if(cursor.moveToFirst()){
-            do{
-                long songId = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID));
-                if(playingStatus.getLastPlayedSongId()==songId){
-                    if(cursor.moveToNext()){
-                        return cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID));
-                    }else{
-                        cursor.moveToFirst();
-                        return cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID));
-                    }
+                Cursor cursor = playingStatus.getIsShuffleOn()?myMediaCursor.getMediaCursorShuffleOn():myMediaCursor.getMediaCursorShuffleOff();
+                if(cursor.moveToFirst()){
+                    do{
+                        long songId = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID));
+                        if(playingStatus.getLastPlayedSongId()==songId){
+                            if(cursor.moveToNext()){
+                                return cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID));
+                            }else{
+                                cursor.moveToFirst();
+                                return cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID));
+                            }
+                        }
+                    }while(cursor.moveToNext());
                 }
-            }while(cursor.moveToNext());
-        }
-        return 0;
+                return 0;
     }
 }
 
