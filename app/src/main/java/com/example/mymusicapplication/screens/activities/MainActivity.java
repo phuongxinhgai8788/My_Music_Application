@@ -1,95 +1,75 @@
 package com.example.mymusicapplication.screens.activities;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
+import android.view.View;
 
-import androidx.annotation.RequiresApi;
+import androidx.core.view.GravityCompat;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
-import com.example.mymusicapplication.model.Song;
-import com.example.mymusicapplication.screens.album.Album;
-import com.example.mymusicapplication.screens.album.AlbumViewModel;
-import com.example.mymusicapplication.screens.songs.SongListViewModel;
-import com.example.mymusicapplication.repository.StateRepository;
-import com.example.mymusicapplication.screens.now_playing_service.MusicService;
-import com.example.mymusicapplication.utils.Constants;
+import com.example.mymusicapplication.R;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.example.mymusicapplication.base.BaseActivity;
+import com.example.mymusicapplication.databinding.MainActivityBinding;
 
-public class MainActivity extends BaseActivity{
+public class MainActivity extends BaseActivity<MainActivityBinding> {
+    private NavHostFragment _navHostFragment;
+    public static NavController mNavController;
 
 
-    private static final String TAG = "MainActivity";
-
-    @SuppressLint("Range")
-    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Cursor cursor = SongListViewModel.getInstance().getCursor();
+    protected int getLayout() {
+        return R.layout.main_activity;
+    }
 
-//        Test notification
+    @Override
+    protected void onInit() {
+        createNavController();
+    }
 
-//        Log.i(TAG, "Number of song in the device: "+cursor.getCount());
-//        Log.i(TAG, "Cursor moves to first position: "+cursor.moveToFirst());
-//
-//        @SuppressLint("Range") String title = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE));
-//        @SuppressLint("Range") String artist = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST));
-//
-//        Log.i(TAG, "Current song title: "+title);
-//        Log.i(TAG, "Current artist: "+artist);
-//
-//        StateRepository.getInstance().saveLastPlayedSongTitle(title);
-//        StateRepository.getInstance().saveLastPlayedSongArtist(artist);
-//        StateRepository.getInstance().savePlayedSongPosition(0);
-//
-//        Intent intent = new Intent(this, MusicService.class);
-//        intent.setAction(Constants.ACTION_PLAY_PREVIOUS);
-//        startForegroundService(intent);
+    private void createNavController() {
+        _navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container_view);
+        mNavController = _navHostFragment.getNavController();
 
-        // Test album data
-        AlbumViewModel albumViewModel = new AlbumViewModel();
-        List<Album> albumList = albumViewModel.getAlbumList();
-        albumList.forEach((album)->{
-            Log.i(TAG, album.toString());
+        NavigationUI.setupWithNavController(binding.bottomNavigate, mNavController);
+        binding.imgMenu.setOnClickListener(view -> {
+            binding.drawableLayout.openDrawer(GravityCompat.START);
         });
+
     }
 
-
-
-    private Song getCurrentSong(Cursor mediaCursor){
-        @SuppressLint("Range") String title = mediaCursor.getString(mediaCursor.getColumnIndex(MediaStore.Audio.Media.TITLE));
-        @SuppressLint("Range") String artist = mediaCursor.getString(mediaCursor.getColumnIndex(MediaStore.Audio.Media.ARTIST));
-        @SuppressLint("Range") long duration = mediaCursor.getLong(mediaCursor.getColumnIndex(MediaStore.Audio.Media.DURATION));
-        @SuppressLint("Range") long id = mediaCursor.getLong(mediaCursor.getColumnIndex(MediaStore.Audio.Media._ID));
-        @SuppressLint("Range") long albumId = mediaCursor.getLong(mediaCursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID));
-        @SuppressLint("Range") String album = mediaCursor.getString(mediaCursor.getColumnIndex(MediaStore.Audio.Media.ALBUM));
-
-
-        String[] genresProjection = {
-                MediaStore.Audio.Genres.NAME,
-                MediaStore.Audio.Genres._ID
-        };
-        int id_column_index = mediaCursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID);
-        int musicId = mediaCursor.getInt(id_column_index);
-        Uri uri = MediaStore.Audio.Genres.getContentUriForAudioId("external", musicId);
-        Cursor genresCursor = this.getContentResolver().query(uri, genresProjection, null, null, null);
-        int genre_colum_index = genresCursor.getColumnIndexOrThrow(MediaStore.Audio.Genres.NAME);
-
-        List<String> genreArray = new ArrayList<>();
-        if(genresCursor.moveToFirst()){
-            do {
-                genreArray.add(genresCursor.getString(genre_colum_index));
-
-            } while (genresCursor.moveToNext());
+    public void updateIconStartHome(Integer src){
+        if(src != null){
+            binding.imgMenu.setBackgroundResource(src);
+            binding.imgMenu.setVisibility(View.VISIBLE);
+            return;
         }
-        return new Song(id, title, artist, duration, album, albumId, genreArray);
+        binding.imgMenu.setVisibility(View.INVISIBLE);
     }
 
-}
+    public void updateIconEndHome(Integer src){
+        Log.d("SangTB", "updateIconEndHome: "+src);
+        if(src != null){
+            binding.imgSearch.setVisibility(View.VISIBLE);
+            binding.imgSearch.setBackgroundResource(src);
+            return;
+        }
+        binding.imgSearch.setVisibility(View.INVISIBLE);
+    }
+
+    public void updateTitleHome(String title){
+        binding.txtTitle.setText(title);
+    }
+
+    public void displayEdittext(boolean display){
+        binding.edtSearch.setVisibility(display? View.VISIBLE : View.INVISIBLE);
+        if(display){
+            binding.imgSearch.setVisibility(View.INVISIBLE);
+            binding.txtTitle.setText("");
+            return;
+        }
+        binding.imgSearch.setVisibility(View.VISIBLE);
+    }
+    }
+

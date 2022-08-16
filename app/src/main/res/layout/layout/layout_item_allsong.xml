@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="song"
+            type="com.example.mymusicapplication.model.Song" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_14sdp"
+        android:orientation="vertical">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/imgAvatar"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:background="@color/h181B2C"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_default_allsong"
+            app:riv_corner_radius="@dimen/_30sdp"
+            app:riv_mutate_background="true"
+            app:setUrlImage="@{song.image}" />
+
+        <TextView
+            android:id="@+id/txtTitle"
+            style="@style/TextNormal"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_alignTop="@+id/imgAvatar"
+            android:layout_toEndOf="@+id/imgAvatar"
+            android:text="@{song.title}"
+            tools:text = "Sangtb"/>
+
+        <TextView
+            style="@style/TextMedium"
+            android:text="@{song.artist}"
+            android:layout_toEndOf="@+id/imgAvatar"
+            android:layout_below="@+id/txtTitle"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginLeft="@dimen/_15sdp"
+            tools:text = "Sangtb"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_video"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/imgVideo1"/>
+
+        <View
+            style="@style/BgLine"
+            android:layout_alignBottom="@+id/imgAvatar"
+            android:layout_alignLeft="@+id/txtTitle"/>
+    </RelativeLayout>
+</layout>

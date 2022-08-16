@@ -5,24 +5,23 @@ import android.graphics.Bitmap;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.example.mymusicapplication.model.Song;
-import com.example.mymusicapplication.utils.Constants;
 
 public class BitmapLoader {
-    private Context context;
-
     private static BitmapLoader INSTANCE;
+    private Context context;
+    private BitmapLoader bitmapLoader;
 
-    private BitmapLoader(Context context){
+    private BitmapLoader(Context context) {
         this.context = context;
     }
-    public static void initialize(Context context){
+
+    public static void initialize(Context context) {
         INSTANCE = new BitmapLoader(context);
     }
 
-    public static BitmapLoader getINSTANCE(){
+    public static BitmapLoader getInstance(){
         if(INSTANCE == null){
-            throw new IllegalStateException("AlbumArtLoader must be initialized!");
+            throw new IllegalStateException("StateRepository must be initialized!");
         }
         return INSTANCE;
     }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:paddingBottom="@dimen/_27sdp"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/txtTitle"
+            style="@style/TextTitle"
+            android:text="@string/playlist"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtViewAll"
+            style="@style/TextMedium"
+            android:text="@string/view_all"
+            android:layout_marginRight="@dimen/_15sdp"
+            android:textColor="@color/orange"
+            app:layout_constraintBottom_toBottomOf="@+id/txtTitle"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerHotRecommended1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_18sdp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
+
+        <View
+            style="@style/BgLine"
+            android:layout_marginRight="@dimen/_23sdp"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerHotRecommended1"
+            android:layout_marginTop="@dimen/_28sdp"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

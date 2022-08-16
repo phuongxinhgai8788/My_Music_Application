@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="song"
+            type="com.example.mymusicapplication.model.Song" />
+    </data>
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/_17sdp"
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginRight="@dimen/_15sdp"
+        android:layout_height="wrap_content">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:minWidth="@dimen/_200sdp"
+            app:riv_corner_radius="@dimen/_7sdp"
+            android:scaleType="fitXY"
+            app:riv_mutate_background="true"
+            app:riv_border_color="@color/white_alpha"
+            app:riv_border_width="0.5dp"
+            android:background="@color/h181B2C"
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="@dimen/_125sdp"
+            app:setUrlImage="@{song.image}"
+            />
+
+        <TextView
+            style="@style/TextNormal"
+            android:text="@{song.title}"
+            android:layout_marginTop="@dimen/_15sdp"/>
+
+        <TextView
+            style="@style/TextMedium"
+            android:text="@{song.artist}"
+            android:textColor="@color/h585A66"
+            android:layout_marginTop="@dimen/_3sdp"/>
+    </LinearLayout>
+</layout>

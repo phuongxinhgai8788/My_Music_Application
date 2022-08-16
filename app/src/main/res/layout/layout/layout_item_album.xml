@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="song"
+            type="com.example.mymusicapplication.model.Song" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_marginRight="@dimen/_18sdp"
+        android:layout_marginBottom="@dimen/_18sdp"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imgAvatar"
+            android:layout_width="@dimen/_125sdp"
+            android:layout_height="@dimen/_125sdp"
+            android:scaleType="fitXY"
+            app:riv_mutate_background="true"
+            app:setUrlImage="@{song.image}" />
+
+        <TextView
+            android:id="@+id/txtTitle"
+            style="@style/TextMedium"
+            android:layout_below="@+id/imgAvatar"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="@{song.album}"
+            android:textColor="@color/hEEEEEE"
+            android:textSize="@dimen/_12ssp"
+            tools:text="kdfkd" />
+
+        <TextView
+            android:id="@+id/txtArtist"
+            style="@style/TextMedium"
+            android:layout_below="@+id/txtTitle"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="@{song.artist}"
+            android:textColor="@color/hC1C0C0"
+            tools:text="kdfkd" />
+
+        <ImageView
+            android:layout_width="@dimen/_25sdp"
+            android:id="@+id/imgMenuItem"
+            style="@style/ImageButton"
+            android:layout_alignBottom="@+id/txtTitle"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_menu_dots" />
+
+        <TextView
+            style="@style/TextMedium"
+            android:layout_alignBottom="@+id/txtArtist"
+            android:layout_alignParentRight="true"
+            android:text="10 songs"
+            android:textColor="@color/hC1C0C0" />
+    </RelativeLayout>
+</layout>
