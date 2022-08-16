@@ -12,18 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SongListViewModel {
+
     private final String TAG = "SongListLoader";
 
     private PlayingStatus playingStatus = PlayingStatus.getInstance();
     private MyMediaCursor myMediaCursor = MyMediaCursor.getInstance();
-
-    private List<SongItem> songItemList = new ArrayList<>();
 
     public SongListViewModel(){
 
     }
 
     public List<SongItem> getSongItemList(){
+        List<SongItem> songItemList = new ArrayList<>();
         Cursor cursor = playingStatus.getIsShuffleOn()? myMediaCursor.getMediaCursorShuffleOn(): myMediaCursor.getMediaCursorShuffleOff();
         if(cursor.moveToFirst()){
             do{

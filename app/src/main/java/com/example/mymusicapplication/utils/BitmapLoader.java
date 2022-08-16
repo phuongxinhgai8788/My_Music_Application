@@ -21,7 +21,7 @@ public class BitmapLoader {
 
     public static BitmapLoader getInstance(){
         if(INSTANCE == null){
-            throw new IllegalStateException("StateRepository must be initialized!");
+            throw new IllegalStateException("BitmapLoader must be initialized!");
         }
         return INSTANCE;
     }

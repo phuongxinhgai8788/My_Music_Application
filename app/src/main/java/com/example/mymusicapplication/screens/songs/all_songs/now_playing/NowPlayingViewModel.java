@@ -1,18 +1,14 @@
 package com.example.mymusicapplication.screens.songs.all_songs.now_playing;
 
-import android.app.Application;
 import android.database.Cursor;
 import android.provider.MediaStore;
 
-import androidx.databinding.BaseObservable;
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.mymusicapplication.base.BaseViewModel;
 import com.example.mymusicapplication.data_source.MyMediaCursor;
 import com.example.mymusicapplication.repository.PlayingStatus;
 
-public class NowPlayingViewModel extends BaseViewModel {
+public class NowPlayingViewModel {
 
     private static final String TAG = "NowPlayingViewModel";
     private NowPlaying nowPlaying;
@@ -29,8 +25,7 @@ public class NowPlayingViewModel extends BaseViewModel {
     private MutableLiveData<Boolean> isShuffleOnMutable = new MutableLiveData<>();
     private MutableLiveData<Boolean> isRepeatedMutable = new MutableLiveData<>();
 
-    public NowPlayingViewModel(Application application){
-        super(application);
+    public NowPlayingViewModel(){
         initCursor();
         initData();
     }
