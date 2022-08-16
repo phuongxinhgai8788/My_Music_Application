@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/_24sdp">
+
+            <ImageView
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="@dimen/_70sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:src="@drawable/ic_logo" />
+
+            <TextView
+                style="@style/TextTitle"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:text="@string/music" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/txtSong"
+                    style="@style/TextMedium"
+                    android:layout_marginTop="@dimen/_40sdp"
+                    android:text="@string/songs"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/txtAlbum"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txtNumber"
+                    style="@style/TextMedium"
+                    android:text="328"
+                    app:layout_constraintBottom_toTopOf="@+id/txtSong"
+                    app:layout_constraintLeft_toLeftOf="@+id/txtSong"
+                    app:layout_constraintRight_toRightOf="@+id/txtSong" />
+
+                <TextView
+                    android:id="@+id/txtAlbum"
+                    style="@style/TextMedium"
+                    android:text="@string/albums"
+                    app:layout_constraintBottom_toBottomOf="@+id/txtSong"
+                    app:layout_constraintLeft_toRightOf="@+id/txtSong"
+                    app:layout_constraintRight_toLeftOf="@+id/txtArtist" />
+
+                <TextView
+                    style="@style/TextMedium"
+                    android:text="52"
+                    app:layout_constraintBottom_toBottomOf="@+id/txtNumber"
+                    app:layout_constraintLeft_toLeftOf="@+id/txtAlbum"
+                    app:layout_constraintRight_toRightOf="@+id/txtAlbum" />
+
+                <TextView
+                    android:id="@+id/txtArtist"
+                    style="@style/TextMedium"
+                    android:text="@string/artists"
+                    app:layout_constraintBottom_toBottomOf="@+id/txtSong"
+                    app:layout_constraintLeft_toRightOf="@+id/txtAlbum"
+                    app:layout_constraintRight_toRightOf="parent" />
+
+                <TextView
+                    style="@style/TextMedium"
+                    android:text="87"
+                    app:layout_constraintBottom_toBottomOf="@+id/txtNumber"
+                    app:layout_constraintLeft_toLeftOf="@+id/txtArtist"
+                    app:layout_constraintRight_toRightOf="@+id/txtArtist" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerHeader"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/h10121D"
+            android:paddingLeft="@dimen/_20sdp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="vertical"/>
+    </LinearLayout>
+</layout>

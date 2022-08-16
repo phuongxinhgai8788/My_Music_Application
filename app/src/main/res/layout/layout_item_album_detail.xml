@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="songItem"
+            type="com.example.mymusicapplication.screens.songs.albums.detail.SongItem" />
+    </data>
+
+    <RelativeLayout
+        android:layout_marginTop="@dimen/_17sdp"
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginRight="@dimen/_15sdp"
+        android:layout_height="wrap_content">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            app:riv_corner_radius="@dimen/_7sdp"
+            android:scaleType="fitXY"
+            android:id="@+id/imgVideo"
+            android:layout_width="@dimen/_22sdp"
+            android:layout_height="@dimen/_22sdp"
+            android:src="@drawable/ic_video"
+            android:layout_centerVertical="true"
+            android:background="@color/h181B2C"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/line1"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_alignTop="@+id/imgVideo"
+            android:gravity="center_vertical"
+            android:layout_toEndOf="@+id/imgVideo"
+            android:layout_alignBottom="@+id/imgVideo"
+            >
+            <TextView
+                style="@style/TextNormal"
+                android:text="@{songItem.name}"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:ellipsize="end"
+                android:maxLines="1"/>
+            <TextView
+                style="@style/TextNormal"
+                android:text="@{songItem.durationString}"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                />
+            <TextView
+                style="@style/ImageButton"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                app:drawableEndCompat="@drawable/ic_3_dots_horizontal" />
+        </LinearLayout>
+
+        <View
+            style="@style/BgLine"
+            android:layout_toEndOf="@+id/imgVideo"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_below="@+id/imgVideo"/>
+
+    </RelativeLayout>
+</layout>

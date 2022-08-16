@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="iconabc"
+            type="Integer" />
+    </data>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawableLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/_25sdp">
+
+            <ImageView
+                android:id="@+id/imgMenu"
+                style="@style/ImageButton"
+                android:layout_marginLeft="@dimen/_20sdp"
+                app:layout_constraintBottom_toBottomOf="@+id/edtSearch"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/edtSearch" />
+
+            <EditText
+                android:id="@+id/edtSearch"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginLeft="@dimen/_19sdp"
+                android:layout_marginRight="@dimen/_19sdp"
+                android:alpha="0.5"
+                android:background="@drawable/bg_search"
+                android:drawableStart="@drawable/ic_search"
+                android:gravity="center"
+                android:hint="@string/search_album_song"
+                android:paddingLeft="@dimen/_10sdp"
+                android:textColorHint="@color/white"
+                app:layout_constraintLeft_toRightOf="@+id/imgMenu"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtTitle"
+                style="@style/TextTitle"
+                app:layout_constraintBottom_toBottomOf="@+id/imgMenu"
+                app:layout_constraintLeft_toRightOf="@+id/imgMenu"
+                app:layout_constraintRight_toLeftOf="@+id/imgSearch"
+                app:layout_constraintTop_toTopOf="@+id/imgMenu" />
+
+            <ImageView
+                android:id="@+id/imgSearch"
+                style="@style/ImageButton"
+                android:layout_marginRight="@dimen/_18sdp"
+                android:src="@drawable/ic_search"
+                app:layout_constraintBottom_toBottomOf="@+id/imgMenu"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imgMenu" />
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragment_container_view"
+                android:name="androidx.navigation.fragment.NavHostFragment"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/_30sdp"
+                app:defaultNavHost="true"
+                app:layout_constraintBottom_toTopOf="@+id/bottomNavigate"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtSearch"
+                app:navGraph="@navigation/nav_music" />
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottomNavigate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/bg_bottom_bar"
+                app:itemIconTint="@color/bottom_bar_text_color"
+                app:itemTextColor="@color/bottom_bar_text_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:menu="@menu/bottom_nav_menu" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigationDrawerLayout"
+            android:layout_width="match_parent"
+            android:background="@color/back_ground"
+            android:layout_height="match_parent"
+            android:layout_gravity="start" >
+            <fragment
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:name="com.example.mymusicapplication.screens.slide.FragmentSlide"
+                android:id="@+id/fragmentSlide"/>
+        </com.google.android.material.navigation.NavigationView>
+    </androidx.drawerlayout.widget.DrawerLayout>
+</layout>

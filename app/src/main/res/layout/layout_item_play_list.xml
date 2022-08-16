@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="playlist"
+            type="com.example.mymusicapplication.screens.home.playlist.Playlist" />
+    </data>
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/_17sdp"
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginRight="@dimen/_15sdp"
+        android:layout_height="wrap_content">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            app:riv_corner_radius="@dimen/_7sdp"
+            android:scaleType="fitXY"
+            android:layout_width="@dimen/_109sdp"
+            android:layout_height="@dimen/_109sdp"
+            android:src="@mipmap/ic_tam_foreground"
+            app:riv_mutate_background="true"
+            app:riv_border_color="@color/white_alpha"
+            app:riv_border_width="0.5dp"
+            android:background="@color/h181B2C"
+            />
+
+        <TextView
+            style="@style/TextNormal"
+            android:text="@{playlist.name}"
+            android:layout_marginTop="@dimen/_15sdp"/>
+
+        <TextView
+            style="@style/TextMedium"
+            android:text='@{playlist.songNo+"songs"}'
+            android:textColor="@color/h585A66"
+            android:layout_marginTop="@dimen/_3sdp"/>
+    </LinearLayout>
+</layout>

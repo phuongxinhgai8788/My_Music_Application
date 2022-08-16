@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="title"
+            type="Integer" />
+
+        <variable
+            name="description"
+            type="String" />
+    </data>
+
+    <merge>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:background="@color/black"
+            android:gravity="bottom"
+            android:paddingLeft="@dimen/_20sdp">
+
+            <TextView
+                android:id="@+id/txtTitle"
+                style="@style/TextNormal"
+                android:layout_marginBottom="@dimen/_4sdp"
+                android:text="@{title}"
+                android:textColor="@color/hEEEEEE" />
+
+            <TextView
+                android:id="@+id/txtDescription"
+                style="@style/TextMedium"
+                android:layout_below="@+id/txtTitle"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:text="@{description}"
+                android:textColor="@color/hC1C0C0"
+                tools:text="100 songs" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/txtTitle"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:src="@drawable/ic_play_playlists" />
+        </RelativeLayout>
+    </merge>
+
+</layout>

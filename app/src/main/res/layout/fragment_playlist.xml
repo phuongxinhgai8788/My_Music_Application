@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="com.example.mymusicapplication.R" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:columnCount="2"
+            android:layout_marginBottom="@dimen/_25sdp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/txtTitle">
+
+            <include
+                layout="@layout/layout_item_playlist_top"
+                app:description='@{"100 songs"}'
+                app:title="@{R.string.my_top_tracks}" />
+
+            <include
+                layout="@layout/layout_item_playlist_top"
+                app:description='@{"323 songs"}'
+                app:title="@{R.string.latest_added}" />
+
+            <include
+                layout="@layout/layout_item_playlist_top"
+                app:description='@{"450 songs"}'
+                app:title="@{R.string.history}" />
+
+            <include
+                layout="@layout/layout_item_playlist_top"
+                app:description='@{"966 songs"}'
+                app:title="@{R.string.favourites}" />
+        </GridLayout>
+
+        <TextView
+            android:id="@+id/txtTitle"
+            style="@style/TextTitle"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:text="@string/playlist"
+            android:layout_marginBottom="@dimen/_25sdp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerPlayList" />
+
+        <TextView
+            android:id="@+id/txtViewAll"
+            style="@style/TextMedium"
+            android:text="@string/view_all"
+            android:layout_marginRight="@dimen/_15sdp"
+            android:textColor="@color/orange"
+            app:layout_constraintBottom_toBottomOf="@+id/txtTitle"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerPlayList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_25sdp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
