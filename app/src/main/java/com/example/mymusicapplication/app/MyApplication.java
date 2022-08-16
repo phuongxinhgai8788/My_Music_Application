@@ -25,7 +25,6 @@ public class MyApplication extends Application {
         setUp();
     }
 
-    //setup nen bo vao splash activity or customApplication
     private void setUp(){
         PlayingStatus.initialize(this);
         MyMediaCursor.initialize(this);
@@ -35,7 +34,6 @@ public class MyApplication extends Application {
         initNotificationChannel();
     }
 
-    //setup nen bo vao splash activity or customApplication
     private void initNotificationChannel() {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             NotificationChannel channel = new NotificationChannel(Constants.NOTIFICATION_CHANNEL_ID, Constants.NOTIFICATION_CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);

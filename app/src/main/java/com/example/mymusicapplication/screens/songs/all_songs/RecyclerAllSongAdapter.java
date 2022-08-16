@@ -19,7 +19,7 @@ public class RecyclerAllSongAdapter extends BaseRecyclerViewAdapter<SongItem, La
     @Override
     public void onBindViewHolder(@NonNull BaseViewHolder<LayoutItemAllsongBinding> holder, int position) {
         SongItem songItem = listItem.get(position);
-        Bitmap songItemBitmap = BitmapLoader.getInstance().getBitmap(songItem.getImagePath());
+        Bitmap songItemBitmap = BitmapLoader.getInstance().getBitmap(songItem.getUriString());
         holder.binding.setSongItem(listItem.get(position));
         holder.binding.imgAvatar.setImageBitmap(songItemBitmap);
     }

@@ -45,7 +45,7 @@
                 style="@style/TextMedium"
                 android:layout_height="match_parent"
                 android:gravity="bottom"
-                android:text="4 album"
+                android:text='@{artist.albumNo+" albums"}'
                 android:textColor="@color/hC1C0C0" />
 
             <TextView
@@ -62,7 +62,7 @@
                 style="@style/TextMedium"
                 android:layout_height="match_parent"
                 android:gravity="bottom"
-                android:text='@{artist.songNo+""}'
+                android:text='@{artist.songNo+" songs"}'
                 android:textColor="@color/hC1C0C0" />
         </LinearLayout>
 

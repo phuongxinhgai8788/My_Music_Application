@@ -8,6 +8,7 @@ import com.example.mymusicapplication.base.BaseViewModel;
 import com.example.mymusicapplication.base.interfaces.IActionAdapterRecycler;
 
 public class ArtistItemViewModel extends BaseViewModel implements IActionAdapterRecycler<Artist> {
+
     public ArtistItemViewModel(@NonNull Application application) {
         super(application);
     }

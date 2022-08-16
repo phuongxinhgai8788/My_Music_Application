@@ -41,8 +41,8 @@ public class GenreListViewModel {
                 if(firstGenre.getName().equals(genre.getName())){
                     cloneGenreList.remove(genre);
                     firstGenre.setSongNo(firstGenre.getSongNo()+count);
+                    count=1;
                 }
-                count=1;
             }
             finalGenreList.add(firstGenre);
         }

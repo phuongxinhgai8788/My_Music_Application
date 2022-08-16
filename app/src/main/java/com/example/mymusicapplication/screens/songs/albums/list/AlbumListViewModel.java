@@ -46,8 +46,8 @@ public class AlbumListViewModel {
                 if(firstArtist.getId()==artist.getId()){
                     cloneAlbumItemList.remove(artist);
                     firstArtist.setSongNo(firstArtist.getSongNo()+count);
+                    count=1;
                 }
-                count=1;
             }
             finalAlbumItemList.add(firstArtist);
         }

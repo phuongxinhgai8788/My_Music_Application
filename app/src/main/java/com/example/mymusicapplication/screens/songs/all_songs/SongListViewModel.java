@@ -30,8 +30,8 @@ public class SongListViewModel {
                 @SuppressLint("Range") String title = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE));
                 @SuppressLint("Range") String artist = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST));
                 @SuppressLint("Range") long id = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media._ID));
-                @SuppressLint("Range") long albumId = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID));
-                songItemList.add(new SongItem(id, title, artist, Constants.ALBUM_ART_PATH+albumId));
+                @SuppressLint("Range") String uri = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA));
+                songItemList.add(new SongItem(id, title, artist, uri));
 
             }while(cursor.moveToNext());
         }

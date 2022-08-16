@@ -39,23 +39,20 @@ public abstract class BaseFragment<VB extends ViewDataBinding,VM extends BaseVie
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewModel.eventSender.observe(getViewLifecycleOwner(), new Observer<DataAction>() {
-            @Override
-            public void onChanged(DataAction dataAction) {
-                Log.d(TAG, "onChanged: "+dataAction.getEventSender());
-                switch (dataAction.getEventSender()){
-                    case ON_CLOSE:
-                        requireActivity().finish();
-                        break;
-                    case ON_NAVIGATE:
-                        MainActivity.mNavController.navigate(dataAction.getActionId(),dataAction.getBundle());
-                        break;
-                    case SHOW_TOAST:
-                        Toast.makeText(requireContext(),dataAction.getMessage(),Toast.LENGTH_LONG).show();
-                        break;
-                    default:
-                        throw new IllegalStateException("No implement method: " + dataAction.getEventSender().ordinal());
-                }
+        viewModel.eventSender.observe(getViewLifecycleOwner(), dataAction -> {
+            Log.d(TAG, "onChanged: "+dataAction.getEventSender());
+            switch (dataAction.getEventSender()){
+                case ON_CLOSE:
+                    requireActivity().finish();
+                    break;
+                case ON_NAVIGATE:
+                    MainActivity.mNavController.navigate(dataAction.getActionId(),dataAction.getBundle());
+                    break;
+                case SHOW_TOAST:
+                    Toast.makeText(requireContext(),dataAction.getMessage(),Toast.LENGTH_LONG).show();
+                    break;
+                default:
+                    throw new IllegalStateException("No implement method: " + dataAction.getEventSender().ordinal());
             }
         });
     }

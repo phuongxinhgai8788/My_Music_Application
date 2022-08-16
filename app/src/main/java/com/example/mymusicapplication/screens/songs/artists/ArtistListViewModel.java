@@ -46,8 +46,9 @@ public class ArtistListViewModel {
                         cloneArtistList.remove(artist);
                         firstArtist.setAlbumNo(firstArtist.getAlbumNo()+count);
                         firstArtist.setSongNo(firstArtist.getSongNo()+count);
+                        count=1;
+
                     }
-                    count=1;
                 }
                 finalList.add(firstArtist);
             }

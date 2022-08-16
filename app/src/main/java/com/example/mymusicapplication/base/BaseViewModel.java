@@ -10,6 +10,7 @@ import com.example.mymusicapplication.model.DataAction;
 import com.example.mymusicapplication.utils.SingleLiveEvent;
 
 public abstract class BaseViewModel extends AndroidViewModel {
+
     private DataAction dataAction = new DataAction();
 
     protected final String TAG = this.getClass().getName();

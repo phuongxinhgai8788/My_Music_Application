@@ -5,13 +5,13 @@ public class SongItem {
     private long id;
     private String title;
     private String artist;
-    private String imagePath;
+    private String uriString;
 
-    public SongItem(long id, String title, String artist, String imagePath) {
+    public SongItem(long id, String title, String artist, String uriString) {
         this.id = id;
         this.title = title;
         this.artist = artist;
-        this.imagePath = imagePath;
+        this.uriString = uriString;
     }
 
     public long getId() {
@@ -38,11 +38,11 @@ public class SongItem {
         this.artist = artist;
     }
 
-    public String getImagePath() {
-        return imagePath;
+    public String getUriString() {
+        return uriString;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+    public void setUriString(String uriString) {
+        this.uriString = uriString;
     }
 }

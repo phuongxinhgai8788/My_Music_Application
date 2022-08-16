@@ -55,7 +55,7 @@
             style="@style/TextMedium"
             android:layout_alignBottom="@+id/txtArtist"
             android:layout_alignParentRight="true"
-            android:text='@{albumItem.songNo+""}'
+            android:text='@{albumItem.songNo+" Songs"}'
             android:textColor="@color/hC1C0C0" />
     </RelativeLayout>
 </layout>

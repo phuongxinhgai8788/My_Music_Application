@@ -7,13 +7,17 @@
         <variable
             name="songItem"
             type="com.example.mymusicapplication.screens.songs.all_songs.SongItem" />
+        <variable
+            name="songItemViewModel"
+            type="com.example.mymusicapplication.screens.songs.all_songs.SongItemViewModel" />
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_14sdp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:onClick="@{()->songItemViewModel.onNavigate(songItem)}">
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/imgAvatar"
